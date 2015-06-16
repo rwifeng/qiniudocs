@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class Qiniu\Storage\UploadManager</title>
+
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+				<li class="active">
+					<a href="namespace-Qiniu.html">
+						Qiniu<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Qiniu.Http.html">
+						Http					</a>
+
+						</li>
+				<li>
+					<a href="namespace-Qiniu.Processing.html">
+						Processing					</a>
+
+						</li>
+				<li class="active">
+					<a href="namespace-Qiniu.Storage.html">
+						Storage					</a>
+
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Qiniu.Storage.BucketManager.html">BucketManager</a></li>
+				<li><a href="class-Qiniu.Storage.FormUploader.html">FormUploader</a></li>
+				<li><a href="class-Qiniu.Storage.ResumeUploader.html">ResumeUploader</a></li>
+				<li class="active"><a href="class-Qiniu.Storage.UploadManager.html">UploadManager</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Qiniu.Storage.html" title="Summary of Qiniu\Storage"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class UploadManager</h1>
+
+
+	<div class="description">
+	<p>主要涉及了资源上传接口的实现</p>
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		<b>Final</b><br>
+		
+		<b>Namespace:</b> <a href="namespace-Qiniu.html">Qiniu</a>\<a href="namespace-Qiniu.Storage.html">Storage</a><br>
+		
+
+				<b>Link:</b>
+				<a href="http://developer.qiniu.com/docs/v6/api/reference/up/">http://developer.qiniu.com/docs/v6/api/reference/up/</a><br>
+			<b>Located at</b> <a href="source-class-Qiniu.Storage.UploadManager.html#9-130" title="Go to source code">Qiniu/Storage/UploadManager.php</a>
+		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-Qiniu.Storage.UploadManager.html#16-18" title="Go to source code">__construct</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="put" id="_put">
+
+		<td class="attributes"><code>
+			 public 
+
+			array[]
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_put">#</a>
+		<code><a href="source-class-Qiniu.Storage.UploadManager.html#20-54" title="Go to source code">put</a>( <span> <var>$upToken</var></span>, <span> <var>$key</var></span>, <span> <var>$data</var></span>, <span> <var>$params</var> = <span class="php-keyword1">null</span></span>, <span> <var>$mime</var> = <span class="php-quote">'application/octet-stream'</span></span>, <span> <var>$checkCrc</var> = <span class="php-keyword1">false</span> </span> )</code>
+
+		<div class="description short">
+			<p>上传二进制流到七牛</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>上传二进制流到七牛</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$upToken</var></dt>
+					<dd>上传凭证</dd>
+					<dt><var>$key</var></dt>
+					<dd>上传文件名</dd>
+					<dt><var>$data</var></dt>
+					<dd>上传二进制流</dd>
+					<dt><var>$params</var></dt>
+					<dd>http://developer.qiniu.com/docs/v6/api/overview/up/response/vars.html#xvar</dd>
+					<dt><var>$mime</var></dt>
+					<dd>上传数据的mimeType</dd>
+					<dt><var>$checkCrc</var></dt>
+					<dd>是否校验crc32</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					array[]<br><p>包含已上传文件的信息，类似：
+                                             [
+                                                 "hash" => "<Hash string>",
+                                                 "key" => "<Key string>"
+                                             ]</p>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="putFile" id="_putFile">
+
+		<td class="attributes"><code>
+			 public 
+
+			array[]
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_putFile">#</a>
+		<code><a href="source-class-Qiniu.Storage.UploadManager.html#57-114" title="Go to source code">putFile</a>( <span> <var>$upToken</var></span>, <span> <var>$key</var></span>, <span> <var>$filePath</var></span>, <span> <var>$params</var> = <span class="php-keyword1">null</span></span>, <span> <var>$mime</var> = <span class="php-quote">'application/octet-stream'</span></span>, <span> <var>$checkCrc</var> = <span class="php-keyword1">false</span> </span> )</code>
+
+		<div class="description short">
+			<p>上传文件到七牛</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>上传文件到七牛</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$upToken</var></dt>
+					<dd>上传凭证</dd>
+					<dt><var>$key</var></dt>
+					<dd>上传文件名</dd>
+					<dt><var>$filePath</var></dt>
+					<dd>上传文件的路径</dd>
+					<dt><var>$params</var></dt>
+					<dd>http://developer.qiniu.com/docs/v6/api/overview/up/response/vars.html#xvar</dd>
+					<dt><var>$mime</var></dt>
+					<dd>上传数据的mimeType</dd>
+					<dt><var>$checkCrc</var></dt>
+					<dd>是否校验crc32</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					array[]<br><p>包含已上传文件的信息，类似：
+                                             [
+                                                 "hash" => "<Hash string>",
+                                                 "key" => "<Key string>"
+                                             ]</p>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="trimParams" id="_trimParams">
+
+		<td class="attributes"><code>
+			 public static
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_trimParams">#</a>
+		<code><a href="source-class-Qiniu.Storage.UploadManager.html#116-129" title="Go to source code">trimParams</a>( <span> <var>$params</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class Qiniu\Auth</title>
+
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+				<li class="active">
+					<a href="namespace-Qiniu.html">
+						Qiniu<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Qiniu.Http.html">
+						Http					</a>
+
+						</li>
+				<li>
+					<a href="namespace-Qiniu.Processing.html">
+						Processing					</a>
+
+						</li>
+				<li>
+					<a href="namespace-Qiniu.Storage.html">
+						Storage					</a>
+
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-Qiniu.Auth.html">Auth</a></li>
+				<li><a href="class-Qiniu.Config.html">Config</a></li>
+				<li><a href="class-Qiniu.Etag.html">Etag</a></li>
+			</ul>
+
+
+
+
+
+			<h3>Functions</h3>
+			<ul>
+				<li><a href="function-Qiniu.base64_urlSafeDecode.html">base64_urlSafeDecode</a></li>
+				<li><a href="function-Qiniu.base64_urlSafeEncode.html">base64_urlSafeEncode</a></li>
+				<li><a href="function-Qiniu.crc32_data.html">crc32_data</a></li>
+				<li><a href="function-Qiniu.crc32_file.html">crc32_file</a></li>
+				<li><a href="function-Qiniu.entry.html">entry</a></li>
+				<li><a href="function-Qiniu.json_decode.html">json_decode</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Qiniu.html" title="Summary of Qiniu"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Auth</h1>
+
+
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		<b>Final</b><br>
+		
+		<b>Namespace:</b> <a href="namespace-Qiniu.html">Qiniu</a><br>
+		
+
+			<b>Located at</b> <a href="source-class-Qiniu.Auth.html#6-142" title="Go to source code">Qiniu/Auth.php</a>
+		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-Qiniu.Auth.html#11-15" title="Go to source code">__construct</a>( <span> <var>$accessKey</var></span>, <span> <var>$secretKey</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="sign" id="_sign">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_sign">#</a>
+		<code><a href="source-class-Qiniu.Auth.html#17-21" title="Go to source code">sign</a>( <span> <var>$data</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="signWithData" id="_signWithData">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_signWithData">#</a>
+		<code><a href="source-class-Qiniu.Auth.html#23-27" title="Go to source code">signWithData</a>( <span> <var>$data</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="signRequest" id="_signRequest">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_signRequest">#</a>
+		<code><a href="source-class-Qiniu.Auth.html#29-46" title="Go to source code">signRequest</a>( <span> <var>$urlString</var></span>, <span> <var>$body</var></span>, <span> <var>$contentType</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="verifyCallback" id="_verifyCallback">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_verifyCallback">#</a>
+		<code><a href="source-class-Qiniu.Auth.html#48-52" title="Go to source code">verifyCallback</a>( <span> <var>$contentType</var></span>, <span> <var>$originAuthorization</var></span>, <span> <var>$url</var></span>, <span> <var>$body</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="privateDownloadUrl" id="_privateDownloadUrl">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_privateDownloadUrl">#</a>
+		<code><a href="source-class-Qiniu.Auth.html#54-68" title="Go to source code">privateDownloadUrl</a>( <span> <var>$baseUrl</var></span>, <span> <var>$expires</var> = <span class="php-num">3600</span></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="uploadToken" id="_uploadToken">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_uploadToken">#</a>
+		<code><a href="source-class-Qiniu.Auth.html#70-88" title="Go to source code">uploadToken</a>( <span> <var>$bucket</var></span>, <span> <var>$key</var> = <span class="php-keyword1">null</span></span>, <span> <var>$expires</var> = <span class="php-num">3600</span></span>, <span> <var>$policy</var> = <span class="php-keyword1">null</span></span>, <span> <var>$strictPolicy</var> = <span class="php-keyword1">true</span> </span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="authorization" id="_authorization">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_authorization">#</a>
+		<code><a href="source-class-Qiniu.Auth.html#137-141" title="Go to source code">authorization</a>( <span> <var>$url</var></span>, <span> <var>$body</var> = <span class="php-keyword1">null</span></span>, <span> <var>$contentType</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>

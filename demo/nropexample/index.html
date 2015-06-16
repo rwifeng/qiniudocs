@@ -1,0 +1,48 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>UFOP示例</title>
+<h1>UFOP示例-色情图片鉴别</h1>
+<body>
+    <form action="nrop.php" method="post" enctype="multipart/form-data" name="form1" id="form1">  
+      <input type="hidden" name="MAX_FILE_SIZE" value="4000000"> 
+      <table border="2">
+          <tr>
+              <td>AcessKey:</td>
+              <td>
+              <p>
+              <input name="ak" type="text" />
+              <a href="https://portal.qiniu.com/setting/key" target="_blank">获取AK/SK</a>
+              </p>
+              </td>
+          </tr>
+          <tr>
+              <td>SecretKey:</td>
+              <td><input name="sk" type="text" /></td>
+          </tr>
+          <tr>
+              <td>空间:</td>
+              <td>
+              <input name="bucket" type="text" value="qiniudemo" />
+              请先确认<a href="https://portal.qiniu.com/" target="_blank">目标空间</a>已经创建。
+              </td>
+          </tr>
+          <tr>
+              <td>空间对应域名:</td>
+              <td>
+              <input name="domain" type="text" value="http://7xji8t.com1.z0.glb.clouddn.com" />
+              域名请带http://且尾部不要有空格和/。可在空间设置页面中查看域名。
+              </td>
+          </tr>
+          <tr>
+              <td>文件（JPEG格式且小于4MB）:</td>
+              <td><input name="userfile" type="file" /></td>
+          </tr>
+          <tr>
+          <td></td>
+          <td align="center"><br><input type="submit" value="上传图片并鉴别" /></td>
+          </tr>
+      </table>
+    </form>  
+</body>
+
+</html>

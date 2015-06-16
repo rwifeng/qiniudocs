@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class Qiniu\Storage\BucketManager</title>
+
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+				<li class="active">
+					<a href="namespace-Qiniu.html">
+						Qiniu<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Qiniu.Http.html">
+						Http					</a>
+
+						</li>
+				<li>
+					<a href="namespace-Qiniu.Processing.html">
+						Processing					</a>
+
+						</li>
+				<li class="active">
+					<a href="namespace-Qiniu.Storage.html">
+						Storage					</a>
+
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-Qiniu.Storage.BucketManager.html">BucketManager</a></li>
+				<li><a href="class-Qiniu.Storage.FormUploader.html">FormUploader</a></li>
+				<li><a href="class-Qiniu.Storage.ResumeUploader.html">ResumeUploader</a></li>
+				<li><a href="class-Qiniu.Storage.UploadManager.html">UploadManager</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Qiniu.Storage.html" title="Summary of Qiniu\Storage"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class BucketManager</h1>
+
+
+	<div class="description">
+	<p>主要涉及了空间资源管理及批量操作接口的实现，具体的接口规格可以参考</p>
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		<b>Final</b><br>
+		
+		<b>Namespace:</b> <a href="namespace-Qiniu.html">Qiniu</a>\<a href="namespace-Qiniu.Storage.html">Storage</a><br>
+		
+
+				<b>Link:</b>
+				<a href="http://developer.qiniu.com/docs/v6/api/reference/rs/">http://developer.qiniu.com/docs/v6/api/reference/rs/</a><br>
+			<b>Located at</b> <a href="source-class-Qiniu.Storage.BucketManager.html#9-352" title="Go to source code">Qiniu/Storage/BucketManager.php</a>
+		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-Qiniu.Storage.BucketManager.html#21-24" title="Go to source code">__construct</a>( <span><code><a href="class-Qiniu.Auth.html">Qiniu\Auth</a></code> <var>$auth</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="buckets" id="_buckets">
+
+		<td class="attributes"><code>
+			 public 
+
+			string[]
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_buckets">#</a>
+		<code><a href="source-class-Qiniu.Storage.BucketManager.html#26-34" title="Go to source code">buckets</a>( )</code>
+
+		<div class="description short">
+			<p>获取指定账号下所有的空间名。</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>获取指定账号下所有的空间名。</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string[]<br>包含所有空间名
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="listFiles" id="_listFiles">
+
+		<td class="attributes"><code>
+			 public 
+
+			array[]
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_listFiles">#</a>
+		<code><a href="source-class-Qiniu.Storage.BucketManager.html#36-78" title="Go to source code">listFiles</a>( <span> <var>$bucket</var></span>, <span> <var>$prefix</var> = <span class="php-keyword1">null</span></span>, <span> <var>$marker</var> = <span class="php-keyword1">null</span></span>, <span> <var>$limit</var> = <span class="php-num">1000</span></span>, <span> <var>$delimiter</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			<p>列取空间的文件列表</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>列取空间的文件列表</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$bucket</var></dt>
+					<dd>空间名</dd>
+					<dt><var>$prefix</var></dt>
+					<dd>列举前缀</dd>
+					<dt><var>$marker</var></dt>
+					<dd>列举标识符</dd>
+					<dt><var>$limit</var></dt>
+					<dd>单次列举个数限制</dd>
+					<dt><var>$delimiter</var></dt>
+					<dd>指定目录分隔符</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					array[]<br><p>包含文件信息的数组，类似：[
+                                             {
+                                                "hash" => "<Hash string>",
+                                                 "key" => "<Key string>",
+                                                 "fsize" => "<file size>",
+                                                 "putTime" => "<file modify time>"
+                                             },
+                                             ...
+                                           ]</p>
+				</div>
+
+
+				<h4>Link</h4>
+				<div class="list">
+						<a href="http://developer.qiniu.com/docs/v6/api/reference/rs/list.html">http://developer.qiniu.com/docs/v6/api/reference/rs/list.html</a><br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="stat" id="_stat">
+
+		<td class="attributes"><code>
+			 public 
+
+			array[]
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_stat">#</a>
+		<code><a href="source-class-Qiniu.Storage.BucketManager.html#80-100" title="Go to source code">stat</a>( <span> <var>$bucket</var></span>, <span> <var>$key</var></span> )</code>
+
+		<div class="description short">
+			<p>获取资源的元信息，但不返回文件内容</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>获取资源的元信息，但不返回文件内容</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$bucket</var></dt>
+					<dd>待获取信息资源所在的空间</dd>
+					<dt><var>$key</var></dt>
+					<dd>待获取资源的文件名</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					array[]<br><p>包含文件信息的数组，类似：
+                                             [
+                                                 "hash" => "<Hash string>",
+                                                 "key" => "<Key string>",
+                                                 "fsize" => "<file size>",
+                                                 "putTime" => "<file modify time>"
+                                             ]</p>
+				</div>
+
+
+				<h4>Link</h4>
+				<div class="list">
+						<a href="http://developer.qiniu.com/docs/v6/api/reference/rs/stat.html">http://developer.qiniu.com/docs/v6/api/reference/rs/stat.html</a><br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="delete" id="_delete">
+
+		<td class="attributes"><code>
+			 public 
+
+			成功返回NULL，失败返回对象{&quot;error&quot;
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_delete">#</a>
+		<code><a href="source-class-Qiniu.Storage.BucketManager.html#102-116" title="Go to source code">delete</a>( <span> <var>$bucket</var></span>, <span> <var>$key</var></span> )</code>
+
+		<div class="description short">
+			<p>删除指定资源</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>删除指定资源</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$bucket</var></dt>
+					<dd>待删除资源所在的空间</dd>
+					<dt><var>$key</var></dt>
+					<dd>待删除资源的文件名</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					成功返回NULL，失败返回对象{&quot;error&quot;<br>=> "<errMsg string>", ...}
+				</div>
+
+
+				<h4>Link</h4>
+				<div class="list">
+						<a href="http://developer.qiniu.com/docs/v6/api/reference/rs/delete.html">http://developer.qiniu.com/docs/v6/api/reference/rs/delete.html</a><br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="rename" id="_rename">
+
+		<td class="attributes"><code>
+			 public 
+
+			成功返回NULL，失败返回对象{&quot;error&quot;
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_rename">#</a>
+		<code><a href="source-class-Qiniu.Storage.BucketManager.html#119-131" title="Go to source code">rename</a>( <span> <var>$bucket</var></span>, <span> <var>$oldname</var></span>, <span> <var>$newname</var></span> )</code>
+
+		<div class="description short">
+			<p>给资源进行重命名，本质为move操作。</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>给资源进行重命名，本质为move操作。</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$bucket</var></dt>
+					<dd>待操作资源所在空间</dd>
+					<dt><var>$oldname</var></dt>
+					<dd>待操作资源文件名</dd>
+					<dt><var>$newname</var></dt>
+					<dd>目标资源文件名</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					成功返回NULL，失败返回对象{&quot;error&quot;<br>=> "<errMsg string>", ...}
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="copy" id="_copy">
+
+		<td class="attributes"><code>
+			 public 
+
+			成功返回NULL，失败返回对象{&quot;error&quot;
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_copy">#</a>
+		<code><a href="source-class-Qiniu.Storage.BucketManager.html#133-151" title="Go to source code">copy</a>( <span> <var>$from_bucket</var></span>, <span> <var>$from_key</var></span>, <span> <var>$to_bucket</var></span>, <span> <var>$to_key</var></span> )</code>
+
+		<div class="description short">
+			<p>给资源进行重命名，本质为move操作。</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>给资源进行重命名，本质为move操作。</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$from_bucket</var></dt>
+					<dd>待操作资源所在空间</dd>
+					<dt><var>$from_key</var></dt>
+					<dd>待操作资源文件名</dd>
+					<dt><var>$to_bucket</var></dt>
+					<dd>目标资源空间名</dd>
+					<dt><var>$to_key</var></dt>
+					<dd>目标资源文件名</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					成功返回NULL，失败返回对象{&quot;error&quot;<br>=> "<errMsg string>", ...}
+				</div>
+
+
+				<h4>Link</h4>
+				<div class="list">
+						<a href="http://developer.qiniu.com/docs/v6/api/reference/rs/copy.html">http://developer.qiniu.com/docs/v6/api/reference/rs/copy.html</a><br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="move" id="_move">
+
+		<td class="attributes"><code>
+			 public 
+
+			成功返回NULL，失败返回对象{&quot;error&quot;
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_move">#</a>
+		<code><a href="source-class-Qiniu.Storage.BucketManager.html#153-171" title="Go to source code">move</a>( <span> <var>$from_bucket</var></span>, <span> <var>$from_key</var></span>, <span> <var>$to_bucket</var></span>, <span> <var>$to_key</var></span> )</code>
+
+		<div class="description short">
+			<p>将资源从一个空间到另一个空间</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>将资源从一个空间到另一个空间</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$from_bucket</var></dt>
+					<dd>待操作资源所在空间</dd>
+					<dt><var>$from_key</var></dt>
+					<dd>待操作资源文件名</dd>
+					<dt><var>$to_bucket</var></dt>
+					<dd>目标资源空间名</dd>
+					<dt><var>$to_key</var></dt>
+					<dd>目标资源文件名</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					成功返回NULL，失败返回对象{&quot;error&quot;<br>=> "<errMsg string>", ...}
+				</div>
+
+
+				<h4>Link</h4>
+				<div class="list">
+						<a href="http://developer.qiniu.com/docs/v6/api/reference/rs/move.html">http://developer.qiniu.com/docs/v6/api/reference/rs/move.html</a><br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="changeMime" id="_changeMime">
+
+		<td class="attributes"><code>
+			 public 
+
+			成功返回NULL，失败返回对象{&quot;error&quot;
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_changeMime">#</a>
+		<code><a href="source-class-Qiniu.Storage.BucketManager.html#173-190" title="Go to source code">changeMime</a>( <span> <var>$bucket</var></span>, <span> <var>$key</var></span>, <span> <var>$mime</var></span> )</code>
+
+		<div class="description short">
+			<p>主动修改指定资源的文件类型</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>主动修改指定资源的文件类型</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$bucket</var></dt>
+					<dd>待操作资源所在空间</dd>
+					<dt><var>$key</var></dt>
+					<dd>待操作资源文件名</dd>
+					<dt><var>$mime</var></dt>
+					<dd>待操作文件目标mimeType</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					成功返回NULL，失败返回对象{&quot;error&quot;<br>=> "<errMsg string>", ...}
+				</div>
+
+
+				<h4>Link</h4>
+				<div class="list">
+						<a href="http://developer.qiniu.com/docs/v6/api/reference/rs/chgm.html">http://developer.qiniu.com/docs/v6/api/reference/rs/chgm.html</a><br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="fetch" id="_fetch">
+
+		<td class="attributes"><code>
+			 public 
+
+			array[]
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_fetch">#</a>
+		<code><a href="source-class-Qiniu.Storage.BucketManager.html#192-221" title="Go to source code">fetch</a>( <span> <var>$url</var></span>, <span> <var>$bucket</var></span>, <span> <var>$key</var></span> )</code>
+
+		<div class="description short">
+			<p>从指定URL抓取资源，并将该资源存储到指定空间中</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>从指定URL抓取资源，并将该资源存储到指定空间中</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$url</var></dt>
+					<dd>指定的URL</dd>
+					<dt><var>$bucket</var></dt>
+					<dd>目标资源空间</dd>
+					<dt><var>$key</var></dt>
+					<dd>目标资源文件名</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					array[]<br><p>包含已拉取的文件信息。
+                        成功时：  [
+                                         [
+                                             "hash" => "<Hash string>",
+                                             "key" => "<Key string>"
+                                         ],
+                                         null
+                                 ]</p>
+
+<pre><code>                    失败时：  [
+                                     null,
+                                    Qiniu/Http/Error
+                             ]
+</code></pre>
+				</div>
+
+
+				<h4>Link</h4>
+				<div class="list">
+						<a href="http://developer.qiniu.com/docs/v6/api/reference/rs/fetch.html">http://developer.qiniu.com/docs/v6/api/reference/rs/fetch.html</a><br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="prefetch" id="_prefetch">
+
+		<td class="attributes"><code>
+			 public 
+
+			成功返回NULL，失败返回对象{&quot;error&quot;
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_prefetch">#</a>
+		<code><a href="source-class-Qiniu.Storage.BucketManager.html#223-238" title="Go to source code">prefetch</a>( <span> <var>$bucket</var></span>, <span> <var>$key</var></span> )</code>
+
+		<div class="description short">
+			<p>从镜像源站抓取资源到空间中，如果空间中已经存在，则覆盖该资源</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>从镜像源站抓取资源到空间中，如果空间中已经存在，则覆盖该资源</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$bucket</var></dt>
+					<dd>待获取资源所在的空间</dd>
+					<dt><var>$key</var></dt>
+					<dd>代获取资源文件名</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					成功返回NULL，失败返回对象{&quot;error&quot;<br>=> "<errMsg string>", ...}
+				</div>
+
+
+				<h4>Link</h4>
+				<div class="list">
+						<a href="http://developer.qiniu.com/docs/v6/api/reference/rs/prefetch.html">http://developer.qiniu.com/docs/v6/api/reference/rs/prefetch.html</a><br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="batch" id="_batch">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_batch">#</a>
+		<code><a href="source-class-Qiniu.Storage.BucketManager.html#240-260" title="Go to source code">batch</a>( <span> <var>$operations</var></span> )</code>
+
+		<div class="description short">
+			<p>在单次请求中进行多个资源管理操作</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>在单次请求中进行多个资源管理操作</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$operations</var></dt>
+					<dd>资源管理操作数组</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<br><p>[
+                  { "code" => <HttpCode int>, "data" => <Data> },
+                  { "code" => <HttpCode int> },
+                  { "code" => <HttpCode int> },
+                  { "code" => <HttpCode int> },
+                  { "code" => <HttpCode int>, "data" => { "error": "<ErrorMessage string>" } },
+                  ...
+              ]</p>
+				</div>
+
+
+				<h4>Link</h4>
+				<div class="list">
+						<a href="http://developer.qiniu.com/docs/v6/api/reference/rs/batch.html">http://developer.qiniu.com/docs/v6/api/reference/rs/batch.html</a><br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="buildBatchCopy" id="_buildBatchCopy">
+
+		<td class="attributes"><code>
+			 public static
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_buildBatchCopy">#</a>
+		<code><a href="source-class-Qiniu.Storage.BucketManager.html#301-304" title="Go to source code">buildBatchCopy</a>( <span> <var>$source_bucket</var></span>, <span> <var>$key_pairs</var></span>, <span> <var>$target_bucket</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="buildBatchRename" id="_buildBatchRename">
+
+		<td class="attributes"><code>
+			 public static
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_buildBatchRename">#</a>
+		<code><a href="source-class-Qiniu.Storage.BucketManager.html#307-310" title="Go to source code">buildBatchRename</a>( <span> <var>$bucket</var></span>, <span> <var>$key_pairs</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="buildBatchMove" id="_buildBatchMove">
+
+		<td class="attributes"><code>
+			 public static
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_buildBatchMove">#</a>
+		<code><a href="source-class-Qiniu.Storage.BucketManager.html#313-316" title="Go to source code">buildBatchMove</a>( <span> <var>$source_bucket</var></span>, <span> <var>$key_pairs</var></span>, <span> <var>$target_bucket</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="buildBatchDelete" id="_buildBatchDelete">
+
+		<td class="attributes"><code>
+			 public static
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_buildBatchDelete">#</a>
+		<code><a href="source-class-Qiniu.Storage.BucketManager.html#319-322" title="Go to source code">buildBatchDelete</a>( <span> <var>$bucket</var></span>, <span> <var>$keys</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="buildBatchStat" id="_buildBatchStat">
+
+		<td class="attributes"><code>
+			 public static
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_buildBatchStat">#</a>
+		<code><a href="source-class-Qiniu.Storage.BucketManager.html#325-328" title="Go to source code">buildBatchStat</a>( <span> <var>$bucket</var></span>, <span> <var>$keys</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>
