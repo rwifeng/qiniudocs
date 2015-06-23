@@ -7,12 +7,14 @@
                 width:50%;
                 border-collapse: collapse;
                 padding: 2px 24px 2px 0px; 
+                table-layout:fixed; 
             } 
 
             table th, td {
                 border: 1px solid black;
                 height: 40px;
              }
+            table tr td:first-child { width: 200px; }
 
             input[type="text"] {
                 width: 100%;
@@ -26,7 +28,7 @@
             }
             
             ul {
-                margin:0 25% auto; 
+                margin:30px 25%; 
                 width:50%;
             }
         </style>
@@ -51,7 +53,7 @@
                 $xmlhttp.onreadystatechange = function() {
                     if ($xmlhttp.readyState == 4) {
                         if($xmlhttp.status == 200){
-                            document.getElementById('up-token').value = $xmlhttp.responseText;
+                            document.getElementById('id_token').value = $xmlhttp.responseText;
                         } else {
                             alert('get uptoken other than 200 code was returned')
                         }
@@ -63,10 +65,14 @@
                 $xmlhttp.send(); 
 
 
-                $file = document.getElementById('up-file');
+                $bucketDomain = 'http://77fxsr.com2.z0.glb.qiniucdn.com';
+                $file = document.getElementById('id_file');
                 $file.onchange = function(){
                     $key = $file.value.split(/(\\|\/)/g).pop(); 
-                    document.getElementById('up-key').value = $key;
+                    document.getElementById('id_key').value = $key;
+                    
+                    $url = document.getElementById('id_url')
+                    $url.href = $url.text = $bucketDomain + '/' + $key;
                 };
             }; 
 
@@ -75,28 +81,33 @@
     <title>小文件上传示例</title>
     <h1 style="text-align: center;">上传一个小文件</h1>
     <body>
+        <ul>
+            <li>UpToken 是使用 devtools 的空间生成。</li>
+            <li>devtools 绑定的域名是：77fxsr.com2.z0.glb.qiniucdn.com </li>
+        </ul>
+
         <form action="http://up.qiniu.com" method="post" enctype="multipart/form-data" >  
             <table>
                 <tr>
                     <td>Upload Token:</td>
-                    <td><input id="up-token" name="token" type="text" /></td>
+                    <td><input id="id_token" name="token" type="text" /></td>
                 </tr>
                 <tr>
                     <td>上传文件名:</td>
-                    <td><input id="up-key" name="key" type="text" /></td>
+                    <td><input id="id_key" name="key" type="text" /></td>
+                </tr>
+                <tr>
+                    <td>上传后文件外链:</td>
+                    <td><a id="id_url" href=""/></a></td>
                 </tr>
                 <tr>
                     <td>文件（小于4MB）:</td>
-                    <td><input id="up-file" name="file" type="file" /></td>
+                    <td><input id="id_file" name="file" type="file" /></td>
                 </tr>
                 <tr>
                     <td colspan="2"><input type="submit" value="上传"/></td>
                 </tr>
             </table>
         </form>  
-        <ul>
-            <li>UpToken 是使用 devtools 的空间生成。</li>
-            <li>devtools 绑定的域名是：77fxsr.com2.z0.glb.qiniucdn.com </li>
-        </ul>
     </body>
 </html>
