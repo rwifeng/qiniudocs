@@ -1,48 +1,102 @@
 <html>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>小文件上传示例</title>
-<h1>上传一个小文件</h1>
-<body>
-    <form action="upload.php" method="post" enctype="multipart/form-data" name="form1" id="form1">  
-      <input type="hidden" name="MAX_FILE_SIZE" value="4000000"> 
-      <table border="2">
-          <tr>
-              <td>AcessKey:</td>
-              <td>
-              <p>
-              <input name="ak" type="text" />
-              <a href="https://portal.qiniu.com/setting/key" target="_blank">获取AK/SK</a>
-              </p>
-              </td>
-          </tr>
-          <tr>
-              <td>SecretKey:</td>
-              <td><input name="sk" type="text" /></td>
-          </tr>
-          <tr>
-              <td>空间:</td>
-              <td>
-              <input name="bucket" type="text" value="qiniudemo" />
-              请先确认<a href="https://portal.qiniu.com/" target="_blank">目标空间</a>已经创建。
-              </td>
-          </tr>
-          <tr>
-              <td>空间对应域名:</td>
-              <td>
-              <input name="domain" type="text" value="http://7xji8t.com1.z0.glb.clouddn.com" />
-              可在空间设置页面中查看空间对应的域名。
-              </td>
-          </tr>
-          <tr>
-              <td>文件（小于4MB）:</td>
-              <td><input name="userfile" type="file" /></td>
-          </tr>
-          <tr>
-          <td></td>
-          <td align="center"><br><input type="submit" value="上传" /></td>
-          </tr>
-      </table>
-    </form>  
-</body>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <style>
+            table {
+                margin:0 25% auto; 
+                width:50%;
+                border-collapse: collapse;
+                padding: 2px 24px 2px 0px; 
+            } 
 
+            table th, td {
+                border: 1px solid black;
+                height: 40px;
+             }
+
+            input[type="text"] {
+                width: 100%;
+                padding: 10px;
+                margin: 0px;
+            }
+
+            input[type="submit"] {
+                margin:auto; 
+                display:block; 
+            }
+            
+            ul {
+                margin:0 25% auto; 
+                width:50%;
+            }
+        </style>
+    
+        <script type="application/javascript">
+            function xmlhttp() {
+                var $xmlhttp;
+
+                if (window.XMLHttpRequest) {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    $xmlhttp = new XMLHttpRequest();
+                } else {
+                    // code for IE6, IE5
+                    $xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                return $xmlhttp;
+            }
+
+            window.onload = function() {
+
+                $xmlhttp = xmlhttp();
+                $xmlhttp.onreadystatechange = function() {
+                    if ($xmlhttp.readyState == 4) {
+                        if($xmlhttp.status == 200){
+                            document.getElementById('up-token').value = $xmlhttp.responseText;
+                        } else {
+                            alert('get uptoken other than 200 code was returned')
+                        }
+                    }
+                }
+               
+                $upTokenUrl = 'http://127.0.0.1:8000/uptoken.php';
+                $xmlhttp.open('GET', $upTokenUrl, true);
+                $xmlhttp.send(); 
+
+
+                $file = document.getElementById('up-file');
+                $file.onchange = function(){
+                    $key = $file.value.split(/(\\|\/)/g).pop(); 
+                    document.getElementById('up-key').value = $key;
+                };
+            }; 
+
+        </script>
+    </head>
+    <title>小文件上传示例</title>
+    <h1 style="text-align: center;">上传一个小文件</h1>
+    <body>
+        <form action="http://up.qiniu.com" method="post" enctype="multipart/form-data" >  
+            <table>
+                <tr>
+                    <td>Upload Token:</td>
+                    <td><input id="up-token" name="token" type="text" /></td>
+                </tr>
+                <tr>
+                    <td>上传文件名:</td>
+                    <td><input id="up-key" name="key" type="text" /></td>
+                </tr>
+                <tr>
+                    <td>文件（小于4MB）:</td>
+                    <td><input id="up-file" name="file" type="file" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="submit" value="上传"/></td>
+                </tr>
+            </table>
+        </form>  
+        <ul>
+            <li>UpToken 是使用 devtools 的空间生成。</li>
+            <li>devtools 绑定的域名是：77fxsr.com2.z0.glb.qiniucdn.com </li>
+        </ul>
+    </body>
 </html>
