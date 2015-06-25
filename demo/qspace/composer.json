@@ -1,0 +1,6 @@
+{
+    "require": {
+        "qiniu/php-sdk": "^7.0",
+        "smarty/smarty": "^3.1"
+    }
+}
