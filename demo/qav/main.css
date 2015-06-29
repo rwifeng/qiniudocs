@@ -121,46 +121,16 @@ button {
 }
 td .Wrapper {
   margin-top: 20px;
-  text-align: center;
   overflow: hidden;
 }
-td .Wrapper .infoWrapper{
-  width:50%;
-  height:100px;
-  margin-left: 10px;
-  text-align: left;
-  line-height: 25px;
-}
-td .Wrapper .infoWrapper a:first-child{
-  margin-right: 10px;
-}
-td .Wrapper.default {
-  margin-top: 20px;
-  text-align: left;
-}
-td .Wrapper.default img{
-  width:100px;
-  height:100px;
-}
-td .imgWrapper {
-  position: relative;
-  width:100px;
-  height: 100px;
-}
-td .imgWrapper .linkWrapper {
-    position: absolute;
-    left: 15px;
-    top: 0;
-    width:100px;
-    height: 100px;
-    cursor: pointer;
-}
-td .imgWrapper .linkWrapper a{
-    line-height: 50px;
 
+td .Wrapper .origin-video {
+  display: inline-block;
+  margin-right: 100px;
 }
+
 table td .hash {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 pre  {
     margin-top: 20px;

@@ -187,40 +187,76 @@ FileProgress.prototype.setProgress = function(percentage, speed, chunk_size) {
 };
 
 FileProgress.prototype.setComplete = function(up, info) {
-    var td = this.fileProgressWrapper.find('td:eq(2) .progress');
 
+    var td = this.fileProgressWrapper.find('td:eq(2) .progress');
     var res = $.parseJSON(info);
-    var url;
-    if (res.url) {
-        url = res.url;
-        str = "<div><strong>Link:</strong><a href=" + res.url + " target='_blank' > " + res.url + "</a></div>" +
-            "<div class=hash><strong>Hash:</strong>" + res.hash + "</div>";
-    } else {
+    var url = res.url;
+    var link = res.url;
+
+    var persistentUrl = 'http://api.qiniu.com/status/get/prefop?id=' + res.persistentId;
+    if (!res.url) {
         var domain = up.getOption('domain');
         url = domain + encodeURI(res.key);
         var link = domain + res.key;
-        str = "<div><strong>Link:</strong><a href=" + url + " target='_blank' > " + link + "</a></div>" +
-            "<div class=hash><strong>Hash:</strong>" + res.hash + "</div>";
     }
-
+    str = "<div><strong>Link:</strong><a href=" + url + " target='_blank' > " + link + "</a></div>" +
+        "<div class=hash><strong>Hash:</strong>" + res.hash + "</div>" +
+        "<div class=process-status><strong>转码状态:</strong><a href=" + persistentUrl + " target='_blank' > " + '等待处理' + "</a></div>";
     td.html(str).removeClass().next().next('.status').hide();
 
     var progressNameTd = this.fileProgressWrapper.find('.progressName');
 
     var Wrapper = $('<div class="Wrapper"/>');
-    var linkWrapper = $('<a class="linkWrapper" target="_blank"/>');
-    linkWrapper.text('播放视频');
-    Wrapper.append(linkWrapper);
+    var playBtn = $('<input class="origin-video btn  btn-primary" type="button" value="播放原视频">');
+    var processedPlayBtn = $('<input class=" btn  btn-info" type="button"  style="display:none" value="播放转码后视频">');
 
+
+    Wrapper.append(playBtn);
+    Wrapper.append(processedPlayBtn);
     progressNameTd.append(Wrapper);
 
-    function addPlayer(videoUrl){
+
+    var processedLink = up.getOption('domain');
+    timerId = setInterval(function() {
+        statusUrl = '/pfop_status.php?id=' + res.persistentId;
+        statusAnchor = td.find('.process-status a');
+
+        $.ajax({
+                  url: statusUrl
+                }).done(function(resp) {
+                    statusObj = JSON && JSON.parse(resp) || $.parseJSON(resp);
+                    item = statusObj.items[0]
+                    switch (item.code) {
+                        case 0:
+                            statusAnchor.text('处理成功');
+                            processedPlayBtn.show();
+                            processedLink += encodeURIComponent(item.key);
+                            clearInterval(timerId);
+                            break;
+                        case 1:
+                            statusAnchor.text('等待处理');
+                            break;
+                        case 2:
+                            statusAnchor.text('正在处理');
+                            break;
+                        case 3:
+                            statusAnchor.text('处理失败');
+                            break;
+                        case 4:
+                            statusAnchor.text('通知失败');
+                            break;
+                    }
+                });
+    }, 1000); //5 seconds
+
+
+    function addPlayer(videoUrl, vtype){
 
         var srcPath = 'js/sewise-player-master/player/sewise.player.min.js?'
 
         var config = {
             server: 'vod',
-            type: 'mp4',
+            type: vtype,
             videourl: videoUrl,
             sourceid: '',
             autostart: 'true',
@@ -258,14 +294,23 @@ FileProgress.prototype.setComplete = function(up, info) {
         $("#video-container").empty();
     }
 
-    linkWrapper.on('click', function() {
+    playBtn.on('click', function() {
 
         $('#myModal-video').modal();
+        addPlayer(url, 'mp4');
         $('#myModal-video').on('hide.bs.modal', function() {
             removePlayer();
-        }).on('show.bs.modal', function() {
-            addPlayer(url);
-        });
+        })
+
+    });
+
+    processedPlayBtn.on('click', function() {
+        console.log(processedLink);
+        $('#myModal-video').modal();
+        addPlayer(processedLink, 'm3u8');
+        $('#myModal-video').on('hide.bs.modal', function() {
+            removePlayer();
+        })
         
     });
 

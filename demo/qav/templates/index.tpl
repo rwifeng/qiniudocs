@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>七牛云存储 - JavaScript SDK</title>
+    <title>七牛云存储 - 视频Demo</title>
     <link href="favicon.ico" rel="shortcut icon">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="main.css">
