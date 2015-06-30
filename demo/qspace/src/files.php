@@ -6,8 +6,8 @@ session_start();
 $uid = $_SESSION['uid'];
 if(!isset($uid))
 {
-   header('location: login.php');
-   return;
+       header('location: login.php');
+          return;
 }
 
 //$offset = $_POST['start'];
@@ -16,9 +16,6 @@ if(!isset($uid))
 $stmt = $DB->prepare('select * from files_info where uid = :uid');
 $stmt->execute(array('uid' => $uid));
 
+$files = $stmt->fetchAll();
 
-
-while($file = $stmt->fetch()) 
-{
-   var_dump($file); 
-}
+echo json_encode($files);
