@@ -214,6 +214,7 @@ FileProgress.prototype.setComplete = function(up, info) {
     Wrapper.append(playBtn);
     Wrapper.append(processedPlayBtn);
     progressNameTd.append(Wrapper);
+    $('table button.btn').hide().parents('tr').next().hide();  //隐藏进度按钮
 
 
     var processedLink = up.getOption('domain');
@@ -241,29 +242,49 @@ FileProgress.prototype.setComplete = function(up, info) {
                             break;
                         case 3:
                             statusAnchor.text('处理失败');
+                            clearInterval(timerId);
                             break;
                         case 4:
                             statusAnchor.text('通知失败');
+                            clearInterval(timerId);
                             break;
                     }
                 });
     }, 1000); //5 seconds
 
 
-    function addPlayer(videoUrl, vtype){
+    var playerState = 'removed';
+    function addPlayer(videoUrl){
+        if (playerState !== 'removed') {
+            return;
+        }
 
+        videoType = function(url) {
+            var type = 'mp4';
+            $.ajax({url: url}).done(function(info){
+                infoObj = JSON && JSON.parse(info) || $.parseJSON(info);
+                if (infoObj.mimeType === 'video/x-flv') {
+                    type = 'flv';
+                } else if (infoObj.mimeType.indexOf('mpegurl') > -1) {
+                    type = 'm3u8';
+                }
+            });
+            return type;
+        }
+
+        var type = videoType(videoUrl);
         var srcPath = 'js/sewise-player-master/player/sewise.player.min.js?'
-
         var config = {
             server: 'vod',
-            type: vtype,
+            type: type,
             videourl: videoUrl,
             sourceid: '',
-            autostart: 'true',
+            autostart: 'false',
             starttime: 0,
             lang: 'en_US',
-            logo: '',
-            title: 'VodVideo',
+            logo: ' ',
+            poster: videoUrl + '_cover',
+            title: 'qiniu video demo',
             buffer: '5',
             skin: 'vodWhite'
         };
@@ -285,19 +306,26 @@ FileProgress.prototype.setComplete = function(up, info) {
         //$("#container").append(script);
         //用JQ的append方法动态添加脚本会造成脚本被执行两次，所以这里改为原生动态添加脚本的方式。
         $("#video-container").get(0).appendChild(script);
+        playerState = 'added'
 
     }
     function removePlayer(){
+
+        if (playerState !== 'added') {
+            return;
+        }
+
         if(window.SewisePlayer){
-            SewisePlayer.doStop();
+            window.SewisePlayer.doStop();
         }
         $("#video-container").empty();
+        playerState = 'removed';
     }
 
     playBtn.on('click', function() {
 
         $('#myModal-video').modal();
-        addPlayer(url, 'mp4');
+        addPlayer(url);
         $('#myModal-video').on('hide.bs.modal', function() {
             removePlayer();
         })
@@ -305,9 +333,8 @@ FileProgress.prototype.setComplete = function(up, info) {
     });
 
     processedPlayBtn.on('click', function() {
-        console.log(processedLink);
         $('#myModal-video').modal();
-        addPlayer(processedLink, 'm3u8');
+        addPlayer(processedLink);
         $('#myModal-video').on('hide.bs.modal', function() {
             removePlayer();
         })

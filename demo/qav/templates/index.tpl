@@ -16,23 +16,23 @@
 <div class="container">
     <div class="text-left col-md-12 wrapper">
         <h1 class="text-left col-md-12 ">
-            七牛云存储 - JavaScript SDK
+            七牛云存储 - 视频Demo
         <!--  
           <a class="btn btn-default view_code" id="show_code">
                 查看初始化代码
             </a>
-            -->
             <a class="btn btn-default view_github" href="https://github.com/qiniupd/qiniu-js-sdk" target="_blank">
                 <img src="http://qtestbucket.qiniudn.com/GitHub-Mark-32px.png">
                 View Source on Github
             </a>
+            -->
         </h1>
         <input type="hidden" id="domain" value="{$domain}">
         <input type="hidden" id="uptoken_url" value="{$uptokenUrl}">
         <ul class="tip col-md-12 text-mute">
             <li>
                 <small>
-                    JavaScript SDK 基于 Plupload 开发，可以通过 Html5 或 Flash 等模式上传文件至七牛云存储。
+                    基于JavaScript SDK 开发，可以通过 Html5 或 Flash 等模式上传文件至七牛云存储。
                 </small>
             </li>
             <li>
@@ -81,23 +81,23 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">视频播放查看</h4>
+            <h4 class="modal-title" id="myModalLabel">视频播放</h4>
           </div>
           <div class="modal-body">
             <div class="modal-body-wrapper text-center">
-                <div id="video-container" style="width: 640px; height: 352px; margin:50px; padding: 20px; border:5px solid #999;">
+                <div id="video-container" style="width: 862px; height: 492px; margin:-20px;border:0px solid #999;">
                 </div>
             </div>
             <div class="modal-body-footer">
             </div>
           </div>
           <div class="modal-footer">
-            <span class="pull-left">本示例仅演示了简单的图片处理效果，了解更多请点击</span>
+            <span class="pull-left">本示例仅演示了简单的视频处理处理效果，了解更多请点击</span>
 
-            <a href="https://github.com/SunLn/qiniu-js-sdk" target="_blank" class="pull-left">本SDK文档</a>
+            <a href="http://developer.qiniu.com/docs/v6/sdk/javascript-sdk.html" target="_blank" class="pull-left">七牛JS SDK文档</a>
             <span class="pull-left">或</span>
 
-            <a href="http://developer.qiniu.com/docs/v6/api/reference/fop/image/" target="_blank" class="pull-left">七牛官方文档</a>
+            <a href="http://developer.qiniu.com/docs/v6/api/reference/fop/av/" target="_blank" class="pull-left">七牛官方文档</a>
 
             <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
           </div>
@@ -105,9 +105,6 @@
       </div>
     </div>
 </div>
-
-
-
 
 <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
