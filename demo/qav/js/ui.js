@@ -219,7 +219,7 @@ FileProgress.prototype.setComplete = function(up, info) {
 
     var processedLink = up.getOption('domain');
     timerId = setInterval(function() {
-        statusUrl = '/pfop_status.php?id=' + res.persistentId;
+        statusUrl = 'pfop_status.php?id=' + res.persistentId;
         statusAnchor = td.find('.process-status a');
 
         $.ajax({

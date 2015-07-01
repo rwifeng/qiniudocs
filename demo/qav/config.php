@@ -11,7 +11,7 @@ class Config
           SK = 'd4eyXtO4JF_XaLkpNAWHnzygOcBbkx_Ywlhi8sKr',
 
           BUCKET_NAME = 'devtest',
-		  UPTOKEN_URL = '/uptoken.php',
+		  UPTOKEN_URL = 'uptoken.php',
 		  DOMAIN = 'http://devtest.qiniudn.com/';
 }
 

@@ -10,51 +10,66 @@
 
 ### 提交页面
 
-我们先写一个简单的 HTML 表单来供用户输入存储空间信息并选择一个本地文件。在点击提交按钮后，浏览器会发送一个 HTTP 请求到指定的 upload.php 页面来执行文件上传动作。
+我们先写一个简单的 HTML 表单来供用户上传到七牛存储空间信息并选择一个本地文件。在点击提交按钮后，浏览器会发送一个 HTTP 请求到七牛上传域名执行文件上传动作。
+
 
 ```html
-<form action="upload.php" method="post" enctype="multipart/form-data" name="form1" id="form1">  
-  <input type="hidden" name="MAX_FILE_SIZE" value="4000000"> 
-  <table border="2">
-      <tr><td>AcessKey:</td> <td><input name="ak" type="text" /></td></tr>
-      <tr><td>SecretKey:</td><td><input name="sk" type="text" /></td></tr>
-      <tr><td>空间:</td><td><input name="bucket" type="text" value="qiniudemo" /></td></tr>
-      <tr><td>空间对应域名:</td><td><input name="domain" type="text" /></td></tr>
-      <tr><td>文件（小于4MB）:</td><td><input name="userfile" type="file" /></td></tr>
-      <tr><td></td><td align="center"><br><input type="submit" value="上传" /></td></tr>
-  </table>
-</form> 
+        
+ <form action="http://up.qiniu.com" method="post" enctype="multipart/form-data" >  
+            <table>
+                <tr>
+                    <td>Upload Token(<a href="">生成Token的代码</a>):</td>
+                    <td><input id="id_token" name="token" type="text" /></td>
+                </tr>
+                <tr>
+                    <td>上传文件名:</td>
+                    <td><input id="id_key" name="key" type="text" /></td>
+                </tr>
+                <tr>
+                    <td>上传后文件外链(<a href="http://developer.qiniu.com/docs/v6/api/overview/dn/security.html">外链规则</a>):</td>
+                    <td><a id="id_url" href=""/></a></td>
+                </tr>
+                <tr>
+                    <td>文件（小于4MB）:</td>
+                    <td><input id="id_file" name="file" type="file" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="submit" value="上传"/></td>
+                </tr>
+            </table>
+        </form> 
+         
 ```
 
 ### 上传动作
 
-在 upload.php 接收到提交的表单后，就要按表单中的内容进行文件的上传工作了。完成这个工作需要两步动作：获取上传授权、上传文件。这两个动作涉及到 SDK 中提供的两个类：[`Qiniu\Auth`](api/class-Qiniu.Auth.html) 和 [`Qiniu\Storage\UploadManager`](api/class-Qiniu.Storage.UploadManager.html)。
+也许你注意到了这个上传表单有一个`token`字段， 所以想要使用form直传七牛一个文件，必须在页面加载的时候，服务端将`token`生成反馈到前端。这个动作涉及到我们 SDK 中提供的方法：[`Qiniu\Auth`](api/class-Qiniu.Auth.html)。
 
 关键代码如下所示：
 
 ```php
-$auth = new Auth($_POST['ak'], $_POST['sk']);
-$token = $auth->uploadToken($_POST['bucket'], null, 3600, null);
-$uploadManager = new UploadManager();
+use Qiniu\Auth;
 
-list($ret, $err) = $uploadManager->putFile($token, null, $_FILES['userfile']['tmp_name']);
+$bucket = '<your_bucket>';
+$accessKey = '<your_access_key>';
+$secretKey = '<your_secret_key>';
+$auth = new Auth($accessKey, $secretKey);
 
-if ($err != null) {
-    echo "上传失败。错误消息：".$err->message();
-    exit;
-}
+$upToken = $auth->uploadToken($bucket);
+
+echo $upToken;
 ```
+
 可以看出，以上代码主要做了以下几步工作：
 
-1. 从 PHP 的环境变量`$_POST`中提取 AccessKey 及 SecretKey 以用于初始化`Auth`对象；
-1. 并使用该`Auth`对象的`uploadToken`方法来生成一个有效的上传授权`$token`;
-1. 将上传授权`$token`作为参数调用`UploadManager`的`putFile`方法，完成文件上传动作；
+1. 使用你的 AccessKey 及 SecretKey 以用于初始化`Auth`对象;
+2. 调用初始化的对象`Auth`对象的方法`uploadToken`来生成上传token;
 
 到这里为止，第一个示例就可以运行起来了。您可以查看该示例的[在线演示](../../demo/simpleuploader)。您也可以直接获取和查看该示例的[源代码]()。
 
 ### 小结
 
-这个示例仅用于演示如何使用 PHP SDK 快速运行第一个云存储服务的程序。我们也有在客户端可以直接上传文件的方式，相比本示例更高效和实用，因此请大家仅将本示例作为学习 PHP SDK 的一个步骤，而不是在产品环境中应用。关于如何在浏览器直接上传文件到云存储服务的详情请见：[表单上传](http://developer.qiniu.com/docs/v6/api/overview/up/form-upload.html)。
+这个示例仅用于演示如何使用 PHP SDK 快速运行第一个云存储服务的程序。本事例尽可能简单的展现七牛的表单上传，因此请大家仅将本示例作为学习 PHP SDK 的一个步骤，而不是在产品环境中应用。详情请见：[表单上传](http://developer.qiniu.com/docs/v6/api/overview/up/form-upload.html)。
 
 本文档接下来我们会介绍更接近于显示场景的一个示例。
 
@@ -90,38 +105,52 @@ if ($err != null) {
 
 #### 帐号验证
 
-```json
-POST: auth.php
-Content-Type: application/json
-{
-    username: <username>
-    password: <password>
-}
+```
+POST /login.php HTTP/1.1
+HOST: demos.qiniu.io
+Accept: */*
+Content-Type: application/x-www-form-urlencoded
+
+
+uname=<username>&pwd=<password>
 ```
 
 #### 获取文件列表
 
-```json
-POST: listfiles.php
-// TODO
+```
+POST /files.php HTTP/1.1
+HOST: demos.qiniu.io
+Accept: */*
+Cookie: <cookie>
+Content-Type: application/x-www-form-urlencoded
+
 ```
 
 #### 获取上传授权
 
 因为移动端并不知道 AK/SK 信息，客户端在需要上传文件时都需要向业务服务器发起一个获取上传授权的请求。
 
-```json
-POST: token.php
-// TODO
+```
+POST /uptoken.php HTTP/1.1
+HOST: demos.qiniu.io
+Accept: */*
+Cookie: <cookie>
+Content-Type: application/x-www-form-urlencoded
+
 ```
 
 #### 回调
 	
 移动端会直接上传文件到云存储服务，因此业务服务器不需要提供上传接口，但是需要提供一个供云存储服务在接收到文件后的回调接口。回调接口的响应内容会由云存储服务返回给移动端。
 
-```json
-POST: callback.php
-// TODO
+```
+POST /callback.php HTTP/1.1
+HOST: demos.qiniu.io
+Accept: */*
+Cookie: <cookie>
+Content-Type: application/x-www-form-urlencoded
+
+uid=<uid>&fname=<file_name>&fkey=<file_key>&desc=<description>
 ```
 
 #### 数据表
@@ -152,8 +181,27 @@ POST: callback.php
 相应的 SQL 语句如下：
 
 ```sql
-// TODO: 输入创建数据库和数据表的语句
-SELECT xxx
+create database qspace;
+
+CREATE TABLE users (
+      uid            INT NOT NULL AUTO_INCREMENT,
+      uname          VARCHAR(128) NOT NULL,
+      password       VARCHAR(128) NOT NULL,
+      status         INT, 
+      PRIMARY KEY (uid)
+);
+
+CREATE TABLE files_info (
+      id             INT NOT NULL AUTO_INCREMENT,
+      uid            INT NOT NULL,
+      fname          VARCHAR(512) NOT NULL,
+      fkey           VARCHAR(512) NOT NULL,
+      createTime     INT, 
+      description    VARCHAR(1024), 
+      PRIMARY KEY (id),
+      FOREIGN KEY (uid) REFERENCES users(uid),
+      UNIQUE INDEX (id)
+);
 ```
 
 ### 服务实现
@@ -180,14 +228,43 @@ BUCKET = 'xxxx';
 
 ```php
 <?php
+require_once 'db.php';
 
-$username = $_POST['username'];
-$password = $_POST['password'];
+session_start();
 
-// TODO: Impl.
-$ret = checkAuth($username, $password);
+if(!isset($_POST['uname']) && !isset($_POST['pwd']))
+{
+        http_response_code(401);
+            $resp = array('status' => 'failed', 'msg' => 'please input username & password!');
+            echo json_encode($resp);
+                return;
+}
 
-?>
+$uname = $_POST['uname'];
+$_pwd = $_POST['pwd'];
+
+$salt = 'Qiniu' . $uname;
+$pwd = crypt($_pwd, $salt);
+
+$stmt = $DB->prepare('select * from users where uname = :name');
+$stmt->execute(array('name' => $uname));
+
+$user = $stmt->fetch();
+
+if ($user['password'] !== $pwd)
+{
+        http_response_code(401);
+            $resp = array('status' => 'failed', 'msg' => 'incorrect username or password!');
+            echo json_encode($resp);
+                return;
+}
+
+$_SESSION['uid'] = $user['uid'];
+$_SESSION['uname'] = $uname;
+
+$resp = array('status' => 'ok', 'uname' => $uname);
+echo json_encode($resp);
+
 ```
 
 #### 获取文件列表
@@ -196,14 +273,23 @@ $ret = checkAuth($username, $password);
 
 ```php
 <?php
-// files.php
+require_once 'db.php';
 
-$uid = $_POST['uid'];
+session_start();
 
-// TODO: Impl.
-$ret = getFiles($uid);
+$uid = $_SESSION['uid'];
+if(!isset($uid))
+{
+       header('location: login.php');
+          return;
+}
 
-?>
+$stmt = $DB->prepare('select * from files_info where uid = :uid');
+$stmt->execute(array('uid' => $uid));
+
+$files = $stmt->fetchAll();
+
+echo json_encode($files);
 ```
 
 #### 获取上传授权
@@ -211,9 +297,32 @@ $ret = getFiles($uid);
 客户端在需要上传文件时都需要先向业务服务器发起一个获取上传授权的请求。 SDK 中的 [`Qiniu\Auth`](api/class-Qiniu.Auth.html) 类提供了 `uploadToken($bucket, ...)` 方法，可以非常便利的生成对应的上传授权。
 
 ```php
-<?php
-// TODO: uptoken的调用.
-?>
+require_once __DIR__.'/../vendor/autoload.php';
+require_once 'db.php';
+
+use Qiniu\Auth;
+
+session_start();
+$uid = $_SESSION['uid'];
+if(!isset($uid))
+{
+        header('location: login.php');
+            return;
+}
+
+header('Access-Control-Allow-Origin:*');
+$bucket = '<bucket_name>';
+$accessKey = '<access_key>';
+$secretKey = '<secret_key>';
+$auth = new Auth($accessKey, $secretKey);
+
+$policy = array(
+            'callbackUrl' => 'http://172.30.251.210/callback.php',
+            'callbackBody' => '{"fname":"$(fname)", "fkey":"$(key)", "desc":"$(x:desc)", "uid":' . $uid . '}');
+
+$upToken = $auth->uploadToken($bucket, null, 3600, $policy);
+
+echo $upToken;
 ```
 
 #### 回调
@@ -221,9 +330,38 @@ $ret = getFiles($uid);
 在收到回调时，通常表示一个文件已经成功上传。回调会包含该文件所对应的描述信息。因此业务服务器在收到回调后，需要将相应的文件信息写入到文件信息表中。
 
 ```php
-<?php
-// TODO: Impl.
-?>
+require_once 'db.php';
+
+$_body = file_get_contents('php://input');
+$body = json_decode($_body, true);
+
+error_log(print_r($_body, true));
+error_log(print_r($body, true));
+
+$uid = $body['uid'];
+$fname = $body['fname'];
+$fkey = $body['fkey'];
+$desc = $body['desc'];
+
+$date = new DateTime();
+$ctime = $date->getTimestamp();
+
+$stmt = $DB->prepare('INSERT INTO files_info (uid, fname, fkey, createTime, description) VALUES (:uid, :fname, :fkey, :ctime, :desc);');
+$ok = $stmt->execute(array('uid' => $uid, 'fname' => $fname, 'fkey' => $fkey, 'ctime' => $ctime, 'desc' => $desc));
+
+header('Content-Type: application/json');
+if (!$ok)
+{
+   $resp = $DB->errorInfo();
+   error_log(print_r($resp, true));
+   http_response_code(500);
+   echo json_encode($resp);
+   return;
+}
+
+$resp = array('ret' => 'success');
+echo json_encode($resp);
+
 ```
 
 ### 服务测试
@@ -234,7 +372,7 @@ $ret = getFiles($uid);
 
 为了确认服务的正常运行，我们还实现了一个简单的监控页面以查看所有上传的图片。该页面假设用户名为`admin`的管理员才有权访问。
 
-前端页面使用 [Bootstrap]() 的缩略图控件实现，并使用 [Smarty]() 模板技术来循环生成最终页面：
+前端页面使用 [Bootstrap](http://getbootstrap.com/) 的缩略图控件实现，并使用 [Smarty](http://www.smarty.net/) 模板技术来循环生成最终页面：
 
 ```html
 {section name="" loop=$files}
@@ -245,7 +383,7 @@ $ret = getFiles($uid);
 
 ### 移动端实现
 
-本示例包含一个 Android 客户端的实现。因为本文档的重心是结合例子讲解 PHP SDK 的使用，因此这里就不详细讲解如何实现 Android 客户端了。您可以下载和安装移动客户端的[安装包]()，或查看移动客户端的[源代码]()。
+本示例包含一个 Android 客户端的实现。因为本文档的重心是结合例子讲解 PHP SDK 的使用，因此这里就不详细讲解如何实现 Android 客户端了。您可以下载和安装移动客户端的[安装包](http://rwxf.qiniudn.com/app-release.apk)，或查看移动客户端的[源代码](https://github.com/simon-liubin/android-demo)。
 
 ### 小结
 
@@ -259,7 +397,7 @@ $ret = getFiles($uid);
 
 这个示例需要用户提供一对 AK/SK，并指定目标存储空间，然后会列出该存储空间中的图片内容。用户可以点选不同的图片以显示大图和查看大图信息。用户还可以选择图片处理模式，输入相应的处理参数，然后可以查看处理的结果。
 
-下面我们分步来实现这个示例。前端实现使用了 [Bootstrap]() 和 [Smarty]() 。
+下面我们分步来实现这个示例。前端实现使用了 [Bootstrap](http://getbootstrap.com/) 和 [Smarty](http://www.smarty.net/) 。
 
 ### 列出文件
 
@@ -367,39 +505,64 @@ if ($ret->ok()) {
 
 ### 大文件上传
 
-因为大文件上传必须在浏览器端进行，因此我们就不演示如何用 PHP SDK 做断点续上传了。网页端的大文件上传我们可以用定制版本的 plupload 来支持。关键的代码如下所示：
-
-```php
-// TODO: 还不太清楚是否用 plupload 就能达成目的了，待确认。。。是不是该祭出我们的 js sdk ？
-```
+因为大文件上传必须在浏览器端进行，因此我们就不演示如何用 PHP SDK 做断点续上传了。网页端的大文件上传我们可以用定制版本的 plupload 来支持。
+具体可以查看我们的[jssdk](https://github.com/qiniu/js-sdk)
 
 ### 上传后自动转码
 
 我们可以通过设置上传策略来通知云存储服务在上传完成后自动发起一个异步的任务。上传策略在调用上传接口时作为参数传入。
 
-```php
-// TODO: 代码待确定，反正应该是一段 js 吧调用上传接口，把上传策略作为参数传入。
+```js 
+var getUpToken = function() {
+            if (!op.uptoken) {
+                var ajax = that.createAjax();
+                ajax.open('GET', that.uptoken_url, true);
+                ajax.setRequestHeader("If-Modified-Since", "0");
+                ajax.onreadystatechange = function() {
+                    if (ajax.readyState === 4 && ajax.status === 200) {
+                        var res = that.parseJSON(ajax.responseText);
+                        that.token = res.uptoken;
+                    }
+                };
+                ajax.send();
+            } else {
+                that.token = op.uptoken;
+            }
+    };
+
+     var uploader = new plupload.Uploader(option);
+        uploader.bind('Init', function(up, params) {
+            getUpToken();
+    });
+
 ```
 
-这里的转码过程需要支持转为 HLS 格式，转码前还需要先打上视频水印。因此。。。 （TODO，我还不知道 m3u8 怎么生成的）
+这里的转码过程需要支持转为 HLS 格式，并且在转码后打上视频水印。具体生成上传策略的代码为：
+
+```php
+$bucket = Config::BUCKET_NAME;
+$auth = new Auth(Config::AK, Config::SK);
+
+$wmImg = Qiniu\base64_urlSafeEncode('http://rwxf.qiniudn.com/logo-s.png');
+$pfopOps = "avthumb/m3u8/wmImage/$wmImg";
+$policy = array(
+    'persistentOps' => $pfopOps,
+    'persistentNotifyUrl' => 'http://<your_notify_url>',
+);
+
+$upToken = $auth->uploadToken($bucket, null, 3600, $policy);
+
+echo json_encode(array('uptoken' => $upToken));
+
+```
+
 
 ### 抽取视频截图
 
-我们可以在收到上传完成事件后发起一个 pfop 请求来触发视频截图的异步操作，并将处理结果保存到另一个存储空间中，以作为这些视频的封面图片。关键代码如下所示：
+  我们可以从上传视频中截取固定时间点得帧，以作为这些视频的封面图片。关键代码如下所示：
 
-```php
-$headers['Authorization'] = 'QBox '.accessToken;
-$headers['Content-Type'] = 'application/x-www-form-urlencoded';
-
-$ret = Client::post("http://api.qiniu.com/pfop/", 
-    "bucket=qiniudemo&key=xxx.mp4&vframe=vframe%2fjpg%2foffset%2f7%2fw%2f480%2fh%2f360", 
-    headers);
 ```
-
-因为这是一个异步任务，因此我们还需要在该异步任务完成后将生成的图片存储到目标存储空间中（待确认流程）。实现在 pfop-callback.php 文件中：
-
-```php
-// TODO
+http://<your_uploaded_video>?vframe/jpg/offset/5
 ```
 
 ### 视频浏览与播放
@@ -408,11 +571,11 @@ $ret = Client::post("http://api.qiniu.com/pfop/",
 
 ### 小结
 
-视频的示例就到这里完成了。您可以直接查看本示例的[在线演示]()，或下载和查看本示例的[完整源代码]()。
+视频的示例就到这里完成了。您可以直接查看本示例的[在线演示]()，或下载和查看本示例的[完整源代码](https://github.com/rwifeng/qiniudocs)。
 
-需要注意的是， JWPlayer 是一个商业软件。如果您准备在产品中使用该播放器，请查看它的网站以了解详细的购买方式和价格。
+需要注意的是， 我们这边使用了sewise的开源播放器， 世面上还有其他比较优秀的播放器，具体你可以参考[播放器推荐](http://kb.qiniu.com/5a9mzj6n) 。
 
-另外，对于视频内容，CDN 的选择会是一个影响视频播放是否能够足够流畅的关键因素。我们的[多 CDN 管理平台]()会给列出的可用 CDN 线路标注是否适用于视频加速，请合理选择。
+另外，对于视频内容，CDN 的选择会是一个影响视频播放是否能够足够流畅的关键因素。我们的[多 CDN 管理平台](https://fusion.qiniu.com/#/)会给列出的可用 CDN 线路标注是否适用于视频加速，请合理选择。
 
 ## 更多资源
 

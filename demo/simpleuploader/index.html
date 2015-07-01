@@ -60,7 +60,7 @@
                     }
                 }
                
-                $upTokenUrl = 'http://127.0.0.1:8000/uptoken.php';
+                $upTokenUrl = '/demo/simpleuploader/uptoken.php';
                 $xmlhttp.open('GET', $upTokenUrl, true);
                 $xmlhttp.send(); 
 
@@ -82,8 +82,8 @@
     <h1 style="text-align: center;">上传一个小文件</h1>
     <body>
         <ul>
-            <li>Upload Token 是使用官方账号的<a href='https://portal.qiniu.com/setting/key'>AK</a>, <a href='https://portal.qiniu.com/setting/key'>SK</a>生成，空间为： devtools </li>
-            <li>空间 devtools 绑定的<a href='https://portal.qiniu.com/'>域名</a>是：77fxsr.com2.z0.glb.qiniucdn.com </li>
+            <li>Upload Token 是使用官方账号的<a href='https://portal.qiniu.com/setting/key'>AK</a>, <a href='https://portal.qiniu.com/setting/key'>SK</a>生成，空间为： devtest </li>
+            <li>空间 devtest 绑定的<a href='https://portal.qiniu.com/'>域名</a>是：77fxsr.com2.z0.glb.qiniucdn.com </li>
         </ul>
 
         <form action="http://up.qiniu.com" method="post" enctype="multipart/form-data" >  

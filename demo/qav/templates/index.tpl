@@ -1,4 +1,3 @@
-<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -110,9 +109,9 @@
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/plupload/plupload.full.min.js"></script>
 <script type="text/javascript" src="js/plupload/i18n/zh_CN.js"></script>
-<script type="text/javascript" src="/js/qiniu.js"></script>
-<script type="text/javascript" src="/js/main.js"></script>
-<script type="text/javascript" src="/js/sewise-player-master/player/sewise.player.min.js"></script>
-<script type="text/javascript" src="/js/ui.js"></script>
+<script type="text/javascript" src="js/qiniu.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/sewise-player-master/player/sewise.player.min.js"></script>
+<script type="text/javascript" src="js/ui.js"></script>
 </body>
 </html>
