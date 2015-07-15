@@ -2,9 +2,9 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/bootstrap.min.css"/>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/demo/imageclipper/css/bootstrap.min.css"/>
+    <script src="/demo/imageclipper/js/jquery.min.js"></script>
+    <script src="/demo/imageclipper/js/bootstrap.min.js"></script>
     <title>Image Clipper</title>
 </head>
 <body>
@@ -17,7 +17,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">数据访问信息</h4>
             </div>
-            <form action="index.php?login" method="post" enctype="multipart/form-data" >
+            <form action="/demo/imageclipper/index.php?login" method="post" enctype="multipart/form-data" >
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="ak">AccessKey</label>

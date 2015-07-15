@@ -8,12 +8,6 @@ function FileProgress(file, targetID) {
     this.height = 0;
     this.fileProgressWrapper = $('#' + this.fileProgressID);
     if (!this.fileProgressWrapper.length) {
-        // <div class="progress">
-        //   <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-        //     <span class="sr-only">20% Complete</span>
-        //   </div>
-        // </div>
-
         this.fileProgressWrapper = $('<tr></tr>');
         var Wrappeer = this.fileProgressWrapper;
         Wrappeer.attr('id', this.fileProgressID).addClass('progressContainer');
@@ -207,14 +201,14 @@ FileProgress.prototype.setComplete = function(up, info) {
     var progressNameTd = this.fileProgressWrapper.find('.progressName');
 
     var Wrapper = $('<div class="Wrapper"/>');
-    var playBtn = $('<input class="origin-video btn  btn-primary" type="button" value="播放原视频">');
-    var processedPlayBtn = $('<input class=" btn  btn-info" type="button"  style="display:none" value="播放转码后视频">');
-
+    var playBtn = $('<input class="origin-video btn  btn-primary play-btn" type="button" value="播放原视频">');
+    playBtn.attr('data-url', url);
+    var processedPlayBtn = $('<input class=" btn  btn-info play-btn" type="button"  style="display:none" value="播放转码后视频">');
 
     Wrapper.append(playBtn);
     Wrapper.append(processedPlayBtn);
     progressNameTd.append(Wrapper);
-    $('table button.btn').hide().parents('tr').next().hide();  //隐藏进度按钮
+    $('table button.btn').hide().parents('tr').next().hide(); //隐藏进度按钮
 
 
     var processedLink = up.getOption('domain');
@@ -223,125 +217,39 @@ FileProgress.prototype.setComplete = function(up, info) {
         statusAnchor = td.find('.process-status a');
 
         $.ajax({
-                  url: statusUrl
-                }).done(function(resp) {
-                    statusObj = JSON && JSON.parse(resp) || $.parseJSON(resp);
-                    item = statusObj.items[0]
-                    switch (item.code) {
-                        case 0:
-                            statusAnchor.text('处理成功');
-                            processedPlayBtn.show();
-                            processedLink += encodeURIComponent(item.key);
-                            clearInterval(timerId);
-                            break;
-                        case 1:
-                            statusAnchor.text('等待处理');
-                            break;
-                        case 2:
-                            statusAnchor.text('正在处理');
-                            break;
-                        case 3:
-                            statusAnchor.text('处理失败');
-                            clearInterval(timerId);
-                            break;
-                        case 4:
-                            statusAnchor.text('通知失败');
-                            clearInterval(timerId);
-                            break;
-                    }
-                });
-    }, 1000); //5 seconds
+            url: statusUrl,
+            async: false
+        }).done(function(resp) {
+            statusObj = JSON && JSON.parse(resp) || $.parseJSON(resp);
+            item = statusObj.items[0]
 
-
-    var playerState = 'removed';
-    function addPlayer(videoUrl){
-        if (playerState !== 'removed') {
-            return;
-        }
-
-        videoType = function(url) {
-            var type = 'mp4';
-            $.ajax({url: url}).done(function(info){
-                infoObj = JSON && JSON.parse(info) || $.parseJSON(info);
-                if (infoObj.mimeType === 'video/x-flv') {
-                    type = 'flv';
-                } else if (infoObj.mimeType.indexOf('mpegurl') > -1) {
-                    type = 'm3u8';
-                }
-            });
-            return type;
-        }
-
-        var type = videoType(videoUrl);
-        var srcPath = 'js/sewise-player-master/player/sewise.player.min.js?'
-        var config = {
-            server: 'vod',
-            type: type,
-            videourl: videoUrl,
-            sourceid: '',
-            autostart: 'false',
-            starttime: 0,
-            lang: 'en_US',
-            logo: ' ',
-            poster: videoUrl + '_cover',
-            title: 'qiniu video demo',
-            buffer: '5',
-            skin: 'vodWhite'
-        };
-
-        for (var prop in config){
-            srcPath += prop + '=' + config[prop] + '&';
-        }
-
-        var script = document.createElement('script');
-        script.type = "text/javascript";
-        script.src = srcPath;
-
-        // var fallbackurls = {
-        //     ogg: "http://www.w3schools.com/html/mov_bbb.ogg",
-        //     webm: "http://www.w3schools.com/html/mov_bbb.webm"
-        // }
-        // script.src = srcPath + "&fallbackurls=" + encodeURIComponent(JSON.stringify(fallbackurls, "", "\t"));
-
-        //$("#container").append(script);
-        //用JQ的append方法动态添加脚本会造成脚本被执行两次，所以这里改为原生动态添加脚本的方式。
-        $("#video-container").get(0).appendChild(script);
-        playerState = 'added'
-
-    }
-    function removePlayer(){
-
-        if (playerState !== 'added') {
-            return;
-        }
-
-        if(window.SewisePlayer){
-            window.SewisePlayer.doStop();
-        }
-        $("#video-container").empty();
-        playerState = 'removed';
-    }
-
-    playBtn.on('click', function() {
-
-        $('#myModal-video').modal();
-        addPlayer(url);
-        $('#myModal-video').on('hide.bs.modal', function() {
-            removePlayer();
-        })
-
-    });
-
-    processedPlayBtn.on('click', function() {
-        $('#myModal-video').modal();
-        addPlayer(processedLink);
-        $('#myModal-video').on('hide.bs.modal', function() {
-            removePlayer();
-        })
-        
-    });
-
+            switch (item.code) {
+                case 0:
+                    statusAnchor.text('处理成功');
+                    processedPlayBtn.show();
+                    processedLink += encodeURIComponent(item.key);
+                    processedPlayBtn.attr('data-url', processedLink);
+                    clearInterval(timerId);
+                    return;
+                case 1:
+                    statusAnchor.text('等待处理');
+                    break;
+                case 2:
+                    statusAnchor.text('正在处理');
+                    break;
+                case 3:
+                    statusAnchor.text('处理失败');
+                    clearInterval(timerId);
+                    break;
+                case 4:
+                    statusAnchor.text('通知失败');
+                    clearInterval(timerId);
+                    break;
+            }
+        });
+    }, 5000); //5 seconds
 };
+
 FileProgress.prototype.setError = function() {
     this.fileProgressWrapper.find('td:eq(2)').attr('class', 'text-warning');
     this.fileProgressWrapper.find('td:eq(2) .progress').css('width', 0).hide();
@@ -363,7 +271,6 @@ FileProgress.prototype.setStatus = function(status, isUploading) {
         this.fileProgressWrapper.find('.status').text(status).attr('class', 'status text-left');
     }
 };
-
 
 FileProgress.prototype.appear = function() {
     if (this.getTimer() !== null) {

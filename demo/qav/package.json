@@ -1,9 +1,9 @@
 {
-    "name": "qiniu-js-sdk",
+    "name": "qiniu-qav-demo",
     "version": "1.0.0-beta",
     "private": false,
     "dependencies": {
-        "qiniu": "~6.1.1",
+        "video.js": "~4.12.11 ",
         "grunt": "~0.4.2",
         "grunt-cli": "~0.1.13",
         "grunt-contrib-jshint": "~0.7.2",

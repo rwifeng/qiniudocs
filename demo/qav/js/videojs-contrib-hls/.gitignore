@@ -1,0 +1,9 @@
+.DS_Store
+dist/*
+/node_modules/
+*~
+*.iml
+*.ipr
+*.iws
+*.swp
+tmp/**.*.swo

@@ -58,17 +58,17 @@ $(function() {
                 progress.setComplete(up, info);
             },
             'Error': function(up, err, errTip) {
-                $('table').show();
-                var progress = new FileProgress(err.file, 'fsUploadProgress');
-                progress.setError();
-                progress.setStatus(errTip);
-            }
-            // ,
-            // 'Key': function(up, file) {
-            //     var key = "";
-            //     // do something with key
-            //     return key
-            // }
+                    $('table').show();
+                    var progress = new FileProgress(err.file, 'fsUploadProgress');
+                    progress.setError();
+                    progress.setStatus(errTip);
+                }
+                // ,
+                // 'Key': function(up, file) {
+                //     var key = "";
+                //     // do something with key
+                //     return key
+                // }
         }
     });
 
@@ -224,5 +224,66 @@ $(function() {
         newImg.src = newUrl;
         return false;
     });
+
+
+    function initPlayer(vLink) {
+
+        if ($("#video-embed").length) {
+            return;
+        }
+
+        var vType = function() {
+
+            var type = '';
+            $.ajax({
+                url: vLink + "?stat",
+                async: false
+            }).done(function(info) {
+                type = info.mimeType;
+                if (type == 'application/x-mpegurl') {
+                    type = 'application/x-mpegURL';
+                }
+            });
+
+            return type;
+        };
+
+        var player = $('<video id="video-embed" class="video-js vjs-default-skin"></video>');
+        $('#video-container').innerHTML = '';
+        $('#video-container').append(player);
+
+        console.log('=======>>Type:', vType(), '====>>vLink:', vLink);
+        var poster = vLink + '?vframe/jpg/offset/2';
+        videojs('video-embed', {
+            "width": "100%",
+            "height": "100%",
+            "controls": true,
+            "autoplay": false,
+            "preload": "auto",
+            "poster": poster
+        }, function() {
+            this.src({
+                type: vType(),
+                src: vLink
+            });
+        });
+    }
+
+    function disposePlayer() {
+        if ($("#video-embed").length) {
+            videojs('video-embed').dispose();
+        }
+    }
+
+    $('#myModal-video').on('hide.bs.modal', function() {
+        disposePlayer();
+    }).on('shown.bs.modal', function() {});
+
+    $('.play-btn').on('click', function() {
+        $('#myModal-video').modal();
+        var url = $(this).data('url');
+        initPlayer(url);
+    });
+
 
 });

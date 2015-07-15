@@ -1,0 +1,35 @@
+{
+  "name": "videojs-contrib-media-sources",
+  "version": "0.3.1",
+  "description": "A Media Source Extensions plugin for video.js",
+  "main": "videojs-media-sources.js",
+  "scripts": {
+    "test": "grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/videojs/video-js-media-sources.git"
+  },
+  "keywords": [
+    "video.js",
+    "mse",
+    "media",
+    "source",
+    "extensions",
+    "video",
+    "html",
+    "flash",
+    "video"
+  ],
+  "author": "Brightcove",
+  "license": "Apache 2",
+  "gitHead": "3374dc863816b74f90a62275c42ff3f1aca0a523",
+  "devDependencies": {
+    "grunt": "^0.4.1",
+    "grunt-contrib-connect": "^0.7.1",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-qunit": "^0.4.0",
+    "qunitjs": "^1.14.0",
+    "video.js": "^4.7.3"
+  }
+}

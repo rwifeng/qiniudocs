@@ -6,9 +6,8 @@ class Config
           DB_USER = 'root',
           DB_PWD = '',
           DB_HOST = '127.0.0.1',
-
-          AK = 'eSnBeEIyUqGGtidOTmsgQCwE23gjUDNJlsI6_mz9',
-          SK = 'd4eyXtO4JF_XaLkpNAWHnzygOcBbkx_Ywlhi8sKr',
+          AK = 'Vhiv6a22kVN_zhtetbPNeG9sY3JUL1HG597EmBwQ',
+          SK = 'b5b5vNg5nnkwkPfW5ayicPE_pj6hqgKMQEaWQ6JD',
 
           BUCKET_NAME = 'devtest',
 		  UPTOKEN_URL = 'uptoken.php',

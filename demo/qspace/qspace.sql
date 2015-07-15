@@ -4,9 +4,12 @@ CREATE TABLE users (
       uid            INT NOT NULL AUTO_INCREMENT,
       uname          VARCHAR(128) NOT NULL,
       password       VARCHAR(128) NOT NULL,
-      status         INT, 
-      PRIMARY KEY (uid)
+      status         INT,   #1: active; 0: disabled。 
+      type           INT,   #1: admin;  0: ordinary。 
+      PRIMARY KEY (uid)  
 );
+INSERT INTO users (uid, uname, password, status, type) VALUES (123456, 'rwf', 'QixHIQJYZI7Zo', 1, 0);
+INSERT INTO users (uid, uname, password, status, type) VALUES (123456, 'qn', 'QixHIQJYZI7Zo', 1, 1);
 
 CREATE TABLE files_info (
       id             INT NOT NULL AUTO_INCREMENT,
@@ -20,4 +23,4 @@ CREATE TABLE files_info (
       UNIQUE INDEX (id)
 );
 
-INSERT INTO users (uid, uname, password, status) VALUES (123456, 'rwf', 'feng', 1);
+INSERT INTO files_info (uid, fname, fkey, createTime, description) VALUES (123456, 'mv', '1.png', 1436929394, 'this is a demo pic!');
