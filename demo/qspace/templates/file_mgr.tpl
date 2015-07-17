@@ -10,6 +10,8 @@
     <!-- Bootstrap core CSS -->
     <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/main.css" rel="stylesheet">
+    <script type="text/javascript" src="assets/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="assets/js/file_mgr.js"></script>
 </head>
 
 <body>
@@ -27,7 +29,7 @@
                     <td>File Key</td>
                     <td>Description</td>
                     <td>Create Time</td>
-                    <td>OP</td>
+                    <td>File Delete</td>
                 </tr>
             </thead>
             {foreach from=$files item=file}
@@ -37,7 +39,7 @@
                 <td>{$file["fkey"]}</td>
                 <td>{$file["description"]}</td>
                 <td>{$file["createTime"]}</td>
-                <td><a href="{$file[id]}">{$file["id"]}</a></td>
+                <td><a class="del" href="" data-fid="{$file['id']}">删除</a></td>
             </tr>
             {/foreach}
         </table>

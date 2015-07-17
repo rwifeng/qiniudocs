@@ -5,10 +5,10 @@ session_start();
 
 if(!isset($_POST['uname']) && !isset($_POST['pwd']))
 {
-        http_response_code(401);
-            $resp = array('status' => 'failed', 'msg' => 'please input username & password!');
-            echo json_encode($resp);
-                return;
+	http_response_code(401);
+	$resp = array('status' => 'failed', 'msg' => 'please input username & password!');
+	echo json_encode($resp);
+	return;
 }
 
 $uname = $_POST['uname'];
@@ -24,10 +24,10 @@ $user = $stmt->fetch();
 
 if ($user['password'] !== $pwd)
 {
-        http_response_code(401);
-            $resp = array('status' => 'failed', 'msg' => 'incorrect username or password!');
-            echo json_encode($resp);
-                return;
+	http_response_code(401);
+	$resp = array('status' => 'failed', 'msg' => 'incorrect username or password!');
+	echo json_encode($resp);
+	return;
 }
 
 $_SESSION['uid'] = $user['uid'];

@@ -4,9 +4,6 @@ require_once 'db.php';
 $_body = file_get_contents('php://input');
 $body = json_decode($_body, true);
 
-error_log(print_r($_body, true));
-error_log(print_r($body, true));
-
 $uid = $body['uid'];
 $fname = $body['fname'];
 $fkey = $body['fkey'];
@@ -22,7 +19,6 @@ header('Content-Type: application/json');
 if (!$ok)
 {
    $resp = $DB->errorInfo();
-   error_log(print_r($resp, true));
    http_response_code(500);
    echo json_encode($resp);
    return;

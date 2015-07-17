@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.24, created on 2015-07-15 07:28:34
+<?php /* Smarty version 3.1.24, created on 2015-07-17 16:50:32
          compiled from "./templates/index.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:183481602855a59b2246c424_64443435%%*/
+/*%%SmartyHeaderCode:92464220055a8c1d8ec8128_87626667%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '9984de98b292ca729c329e71768a6ea35524853a' => 
     array (
       0 => './templates/index.tpl',
-      1 => 1436916513,
+      1 => 1436920979,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '183481602855a59b2246c424_64443435',
+  'nocache_hash' => '92464220055a8c1d8ec8128_87626667',
   'variables' => 
   array (
     'domain' => 0,
@@ -21,19 +21,19 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.24',
-  'unifunc' => 'content_55a59b22490c93_94379751',
+  'unifunc' => 'content_55a8c1d8f00f29_02987265',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_55a59b22490c93_94379751')) {
-function content_55a59b22490c93_94379751 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_55a8c1d8f00f29_02987265')) {
+function content_55a8c1d8f00f29_02987265 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '183481602855a59b2246c424_64443435';
+$_smarty_tpl->properties['nocache_hash'] = '92464220055a8c1d8ec8128_87626667';
 ?>
 <html lang="zh">
 
 <head>
     <meta charset="UTF-8">
-    <title>七牛云存储 - 视频Demo</title>
+    <title>七牛 - 视频Demo</title>
     <link href="favicon.ico" rel="shortcut icon">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="css/main.css">

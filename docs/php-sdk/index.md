@@ -72,7 +72,7 @@
 
 * [快速开发指南](quick-start.html) - 此文档介绍了使用本SDK所需要的基本概念和API
 * [安全管理建议](security.html) - 为保证用户信息的安全，请务必认真阅读本文档
-* [API参考手册](api) - 本SDK所提供的所有API的详细使用说明
+* [API参考手册](api/index.html) - 本SDK所提供的所有API的详细使用说明
 
 ##相关资源
 

@@ -14,12 +14,9 @@ if ($id)
 	$stmt->execute(array('id' => $id));
 }
 
-
 $stmt = $DB->prepare('select * from files_info');
 $stmt->execute();
-
 $files = $stmt->fetchAll();
-// var_dump($files);
 
 $smarty = new Smarty();	
 $smarty->assign('files', $files);

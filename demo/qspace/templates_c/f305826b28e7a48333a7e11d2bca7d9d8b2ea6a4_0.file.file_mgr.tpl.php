@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.24, created on 2015-07-15 08:43:35
+<?php /* Smarty version 3.1.24, created on 2015-07-17 11:49:14
          compiled from "./templates/file_mgr.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:115392497355a5acb71ec0e9_36051841%%*/
+/*%%SmartyHeaderCode:168637740855a87b3abaee32_09140588%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'f305826b28e7a48333a7e11d2bca7d9d8b2ea6a4' => 
     array (
       0 => './templates/file_mgr.tpl',
-      1 => 1436921013,
+      1 => 1437104953,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '115392497355a5acb71ec0e9_36051841',
+  'nocache_hash' => '168637740855a87b3abaee32_09140588',
   'variables' => 
   array (
     'files' => 0,
@@ -21,13 +21,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.24',
-  'unifunc' => 'content_55a5acb7216954_44411205',
+  'unifunc' => 'content_55a87b3abe0a42_46221601',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_55a5acb7216954_44411205')) {
-function content_55a5acb7216954_44411205 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_55a87b3abe0a42_46221601')) {
+function content_55a87b3abe0a42_46221601 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '115392497355a5acb71ec0e9_36051841';
+$_smarty_tpl->properties['nocache_hash'] = '168637740855a87b3abaee32_09140588';
 ?>
 <head>
     <meta charset="utf-8">
@@ -41,6 +41,12 @@ $_smarty_tpl->properties['nocache_hash'] = '115392497355a5acb71ec0e9_36051841';
     <!-- Bootstrap core CSS -->
     <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/main.css" rel="stylesheet">
+    <?php echo '<script'; ?>
+ type="text/javascript" src="assets/js/jquery-1.9.1.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ type="text/javascript" src="assets/js/file_mgr.js"><?php echo '</script'; ?>
+>
 </head>
 
 <body>
@@ -58,6 +64,7 @@ $_smarty_tpl->properties['nocache_hash'] = '115392497355a5acb71ec0e9_36051841';
                     <td>File Key</td>
                     <td>Description</td>
                     <td>Create Time</td>
+                    <td>File Delete</td>
                 </tr>
             </thead>
             <?php
@@ -83,6 +90,8 @@ $foreach_file_Sav = $_smarty_tpl->tpl_vars['file'];
 </td>
                 <td><?php echo $_smarty_tpl->tpl_vars['file']->value["createTime"];?>
 </td>
+                <td><a class="del" href="" data-fid="<?php echo $_smarty_tpl->tpl_vars['file']->value['id'];?>
+">删除</a></td>
             </tr>
             <?php
 $_smarty_tpl->tpl_vars['file'] = $foreach_file_Sav;

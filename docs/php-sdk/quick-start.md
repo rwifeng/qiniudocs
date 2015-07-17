@@ -14,64 +14,44 @@
 
 
 ```html
-        
- <form action="http://up.qiniu.com" method="post" enctype="multipart/form-data" >  
-            <table>
-                <tr>
-                    <td>Upload Token(<a href="">生成Token的代码</a>):</td>
-                    <td><input id="id_token" name="token" type="text" /></td>
-                </tr>
-                <tr>
-                    <td>上传文件名:</td>
-                    <td><input id="id_key" name="key" type="text" /></td>
-                </tr>
-                <tr>
-                    <td>上传后文件外链(<a href="http://developer.qiniu.com/docs/v6/api/overview/dn/security.html">外链规则</a>):</td>
-                    <td><a id="id_url" href=""/></a></td>
-                </tr>
-                <tr>
-                    <td>文件（小于4MB）:</td>
-                    <td><input id="id_file" name="file" type="file" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><input type="submit" value="上传"/></td>
-                </tr>
-            </table>
-        </form> 
-         
+  <form method="post" action="http://up.qiniu.com" enctype="multipart/form-data">
+    <input name="token" type="hidden" value="<upload_token>">
+    <input name="file" type="file" />
+    <input type="submit" value="上传"/>
+  </form>
 ```
 
 ### 上传动作
 
-也许你注意到了这个上传表单有一个`token`字段， 所以想要使用form直传七牛一个文件，必须在页面加载的时候，服务端将`token`生成反馈到前端。这个动作涉及到我们 SDK 中提供的方法：[`Qiniu\Auth`](api/class-Qiniu.Auth.html)。
+也许你注意到了这个上传表单有一个`token`字段， 所以想要使用form直传七牛一个文件，必须在页面加载的时候，向服务端请求`token`并设置到这个表单项中。服务端生成这个`token`涉及到我们 SDK 中提供的方法：[`Qiniu\Auth`](api/class-Qiniu.Auth.html)。
 
 关键代码如下所示：
 
 ```php
-use Qiniu\Auth;
+  use Qiniu\Auth;
 
-$bucket = '<your_bucket>';
-$accessKey = '<your_access_key>';
-$secretKey = '<your_secret_key>';
-$auth = new Auth($accessKey, $secretKey);
+  $bucket = '<your_bucket>';
+  $accessKey = '<your_access_key>';
+  $secretKey = '<your_secret_key>';
+  $auth = new Auth($accessKey, $secretKey);
 
-$upToken = $auth->uploadToken($bucket);
+  $upToken = $auth->uploadToken($bucket);
 
-echo $upToken;
+  echo $upToken;
 ```
 
 可以看出，以上代码主要做了以下几步工作：
 
-1. 使用你的 AccessKey 及 SecretKey 以用于初始化`Auth`对象;
+1. 使用你的 AccessKey 及 SecretKey 用于初始化`Auth`对象;
 2. 调用初始化的对象`Auth`对象的方法`uploadToken`来生成上传token;
 
-到这里为止，第一个示例就可以运行起来了。您可以查看该示例的[在线演示](../../demo/simpleuploader)。您也可以直接获取和查看该示例的[源代码]()。
+到这里为止，第一个示例就可以运行起来了。您可以查看该示例的[在线演示](../../demo/simpleuploader)。您也可以直接获取和查看该示例的[源代码](https://github.com/rwifeng/qiniudocs/tree/master/demo/simpleuploader)。
 
 ### 小结
 
 这个示例仅用于演示如何使用 PHP SDK 快速运行第一个云存储服务的程序。本事例尽可能简单的展现七牛的表单上传，因此请大家仅将本示例作为学习 PHP SDK 的一个步骤，而不是在产品环境中应用。详情请见：[表单上传](http://developer.qiniu.com/docs/v6/api/overview/up/form-upload.html)。
 
-本文档接下来我们会介绍更接近于显示场景的一个示例。
+本文档接下来我们会介绍更接近于现实场景的一个示例。
 
 ## 一个完整的移动应用
 
@@ -83,7 +63,7 @@ echo $upToken;
 1. 查看自己和朋友分享的照片以及描述（不支持评论）；
 1. 上传一张新图片，并添加一段描述；
 
-（TODO: 此处应有一张demo的移动端效果截图）
+[Demo截图](http://rwxf.qiniug.com/demo-screenshot.jpg)
 
 ### 总体架构
 
@@ -214,12 +194,16 @@ CREATE TABLE files_info (
 
 ```php
 <?php
-// config.php
-// 全局设置
-ACESS_KEY = 'xxxxxxxxxx';
-SECRET_KEY = 'xxxxxxxxxx';
-BUCKET = 'xxxx';
-?>
+class Config
+{
+    const DB_NAME = 'qspace',
+          DB_USER = 'root',
+          DB_PWD = '****',
+          DB_HOST = '<your_db_host>',
+          ACCESS_KEY = '<your_access_key>',
+          SECRET_KEY = '<your_secret_key>',
+          BUCKET_NAME = '<your_bucket_name>';
+}
 ```
 
 #### 帐号验证
@@ -234,10 +218,10 @@ session_start();
 
 if(!isset($_POST['uname']) && !isset($_POST['pwd']))
 {
-        http_response_code(401);
-            $resp = array('status' => 'failed', 'msg' => 'please input username & password!');
-            echo json_encode($resp);
-                return;
+  http_response_code(401);
+  $resp = array('status' => 'failed', 'msg' => 'please input username & password!');
+  echo json_encode($resp);
+  return;
 }
 
 $uname = $_POST['uname'];
@@ -253,10 +237,10 @@ $user = $stmt->fetch();
 
 if ($user['password'] !== $pwd)
 {
-        http_response_code(401);
-            $resp = array('status' => 'failed', 'msg' => 'incorrect username or password!');
-            echo json_encode($resp);
-                return;
+  http_response_code(401);
+  $resp = array('status' => 'failed', 'msg' => 'incorrect username or password!');
+  echo json_encode($resp);
+  return;
 }
 
 $_SESSION['uid'] = $user['uid'];
@@ -264,7 +248,6 @@ $_SESSION['uname'] = $uname;
 
 $resp = array('status' => 'ok', 'uname' => $uname);
 echo json_encode($resp);
-
 ```
 
 #### 获取文件列表
@@ -280,8 +263,8 @@ session_start();
 $uid = $_SESSION['uid'];
 if(!isset($uid))
 {
-       header('location: login.php');
-          return;
+    header('location: login.php');
+    return;
 }
 
 $stmt = $DB->prepare('select * from files_info where uid = :uid');
@@ -297,8 +280,10 @@ echo json_encode($files);
 客户端在需要上传文件时都需要先向业务服务器发起一个获取上传授权的请求。 SDK 中的 [`Qiniu\Auth`](api/class-Qiniu.Auth.html) 类提供了 `uploadToken($bucket, ...)` 方法，可以非常便利的生成对应的上传授权。
 
 ```php
-require_once __DIR__.'/../vendor/autoload.php';
+<?php
+require_once 'vendor/autoload.php';
 require_once 'db.php';
+require_once 'config.php';
 
 use Qiniu\Auth;
 
@@ -306,23 +291,23 @@ session_start();
 $uid = $_SESSION['uid'];
 if(!isset($uid))
 {
-        header('location: login.php');
-            return;
+  header('location: login.php');
+  return;
 }
 
-header('Access-Control-Allow-Origin:*');
-$bucket = '<bucket_name>';
-$accessKey = '<access_key>';
-$secretKey = '<secret_key>';
+$bucket = Config::BUCKET_NAME;
+$accessKey = Config::ACCESS_KEY;
+$secretKey = Config::SECRET_KEY;
 $auth = new Auth($accessKey, $secretKey);
 
 $policy = array(
-            'callbackUrl' => 'http://172.30.251.210/callback.php',
-            'callbackBody' => '{"fname":"$(fname)", "fkey":"$(key)", "desc":"$(x:desc)", "uid":' . $uid . '}');
+  'callbackUrl' => 'http://172.30.251.210/callback.php',
+  'callbackBody' => '{"fname":"$(fname)", "fkey":"$(key)", "desc":"$(x:desc)", "uid":' . $uid . '}'
+  );
 
 $upToken = $auth->uploadToken($bucket, null, 3600, $policy);
 
-echo $upToken;
+header('Access-Control-Allow-Origin:*');
 ```
 
 #### 回调
@@ -330,13 +315,11 @@ echo $upToken;
 在收到回调时，通常表示一个文件已经成功上传。回调会包含该文件所对应的描述信息。因此业务服务器在收到回调后，需要将相应的文件信息写入到文件信息表中。
 
 ```php
+<?php
 require_once 'db.php';
 
 $_body = file_get_contents('php://input');
 $body = json_decode($_body, true);
-
-error_log(print_r($_body, true));
-error_log(print_r($body, true));
 
 $uid = $body['uid'];
 $fname = $body['fname'];
@@ -352,21 +335,19 @@ $ok = $stmt->execute(array('uid' => $uid, 'fname' => $fname, 'fkey' => $fkey, 'c
 header('Content-Type: application/json');
 if (!$ok)
 {
-   $resp = $DB->errorInfo();
-   error_log(print_r($resp, true));
-   http_response_code(500);
-   echo json_encode($resp);
-   return;
+  $resp = $DB->errorInfo();
+  http_response_code(500);
+  echo json_encode($resp);
+  return;
 }
 
 $resp = array('ret' => 'success');
 echo json_encode($resp);
-
 ```
 
 ### 服务测试
 
-在开发和部署完成后，我们可以使用一些通用的测试工具来确认这些服务都已经可以正常工作。推荐的工具为 [Paw]() 。
+在开发和部署完成后，我们可以使用一些通用的测试工具来确认这些服务都已经可以正常工作。推荐的工具为 [Paw](https://luckymarmot.com/paw) 。
 
 ### 服务监控
 
@@ -375,10 +356,16 @@ echo json_encode($resp);
 前端页面使用 [Bootstrap](http://getbootstrap.com/) 的缩略图控件实现，并使用 [Smarty](http://www.smarty.net/) 模板技术来循环生成最终页面：
 
 ```html
-{section name="" loop=$files}
-<a class="">
-</a>
-{/section}
+  {foreach from=$files item=file}
+  <tr>
+      <td><a href="{$file[uid]}">{$file["uid"]}</a></td>
+      <td>{$file["fname"]}</td>
+      <td>{$file["fkey"]}</td>
+      <td>{$file["description"]}</td>
+      <td>{$file["createTime"]}</td>
+      <td><a class="del" href="" data-fid="{$file['id']}">删除</a></td>
+  </tr>
+  {/foreach}
 ```
 
 ### 移动端实现
@@ -514,27 +501,26 @@ if ($ret->ok()) {
 
 ```js 
 var getUpToken = function() {
-            if (!op.uptoken) {
-                var ajax = that.createAjax();
-                ajax.open('GET', that.uptoken_url, true);
-                ajax.setRequestHeader("If-Modified-Since", "0");
-                ajax.onreadystatechange = function() {
-                    if (ajax.readyState === 4 && ajax.status === 200) {
-                        var res = that.parseJSON(ajax.responseText);
-                        that.token = res.uptoken;
-                    }
-                };
-                ajax.send();
-            } else {
-                that.token = op.uptoken;
-            }
+  if (!op.uptoken) {
+    var ajax = that.createAjax();
+    ajax.open('GET', that.uptoken_url, true);
+    ajax.setRequestHeader("If-Modified-Since", "0");
+    ajax.onreadystatechange = function() {
+      if (ajax.readyState === 4 && ajax.status === 200) {
+        var res = that.parseJSON(ajax.responseText);
+        that.token = res.uptoken;
+      }
     };
+    ajax.send();
+  } else {
+    that.token = op.uptoken;
+  }
+};
 
-     var uploader = new plupload.Uploader(option);
-        uploader.bind('Init', function(up, params) {
-            getUpToken();
-    });
-
+var uploader = new plupload.Uploader(option);
+uploader.bind('Init', function(up, params) {
+  getUpToken();
+});
 ```
 
 这里的转码过程需要支持转为 HLS 格式，并且在转码后打上视频水印。具体生成上传策略的代码为：
@@ -559,7 +545,7 @@ echo json_encode(array('uptoken' => $upToken));
 
 ### 抽取视频截图
 
-  我们可以从上传视频中截取固定时间点得帧，以作为这些视频的封面图片。关键代码如下所示：
+  我们可以从上传视频中截取固定时间点得帧，以作为这些视频的封面图片。视频截图如下所示：
 
 ```
 http://<your_uploaded_video>?vframe/jpg/offset/5
@@ -571,9 +557,9 @@ http://<your_uploaded_video>?vframe/jpg/offset/5
 
 ### 小结
 
-视频的示例就到这里完成了。您可以直接查看本示例的[在线演示]()，或下载和查看本示例的[完整源代码](https://github.com/rwifeng/qiniudocs)。
+视频的示例就到这里完成了。您可以直接查看本示例的[在线演示](../../demo/qav/)，或下载和查看本示例的[完整源代码](https://github.com/rwifeng/qiniudocs/tree/master/demo/qav)。
 
-需要注意的是， 我们这边使用了sewise的开源播放器， 世面上还有其他比较优秀的播放器，具体你可以参考[播放器推荐](http://kb.qiniu.com/5a9mzj6n) 。
+需要注意的是， 我们这边使用了videojs的开源播放器， 世面上还有其他比较优秀的播放器，具体你可以参考[播放器推荐](http://kb.qiniu.com/5a9mzj6n) 。
 
 另外，对于视频内容，CDN 的选择会是一个影响视频播放是否能够足够流畅的关键因素。我们的[多 CDN 管理平台](https://fusion.qiniu.com/#/)会给列出的可用 CDN 线路标注是否适用于视频加速，请合理选择。
 

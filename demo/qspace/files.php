@@ -6,8 +6,8 @@ session_start();
 $uid = $_SESSION['uid'];
 if(!isset($uid))
 {
-       header('location: login.php');
-          return;
+	header('location: login.php');
+	return;
 }
 
 
