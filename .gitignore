@@ -1,4 +1,14 @@
-bin/
-templates_c/
-node_modules/
-vendor/
+# For MacOS:
+.DS_Store
+
+# For *nix:
+*.swp
+
+# For node
+**/node_modules
+
+# For smarty
+**/templates_c
+
+# For PHP
+**/vendor
