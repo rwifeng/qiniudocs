@@ -12,3 +12,6 @@
 
 # For PHP
 **/vendor
+
+# For  Intellij IDE
+**/.idea
