@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/index.css" />
+    <title>Image Clipper</title>
+</head>
+
+<body>
+    <!-- Modal -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">ImageClipper <small>图片处理示例</small></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-left">
+                    <li class="active"><a href="" target="_blank">图片处理</a></li>
+                    <li><a href="" target="_blank">图片鉴黄/鉴广告</a></li>
+                    <li><a href="" target="_blank">图片信息</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://qiniu.sinaapp.com/docs/php-sdk/quick-start.html" target="_blank">快速开发指南</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 col-md-4">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">上传图片</button>
+                <div class="list-group">
+                    <a href="#" class="list-group-item">
+                        <div class="form-group text-muted">模式:</div>
+                        <select class="form-control" id="mode" name="mode" datastyle="btn-default">
+                            <option role="presentation" tabindex="-1" value="0">设定最大长短边缩放
+                            </option>
+                            <option role="presentation" tabindex="-1" value="1" selected="selected">设定最小宽高缩放，居中裁剪
+                            </option>
+                            <option role="presentation" tabindex="-1" value="2">设定最大宽高缩放
+                            </option>
+                            <option role="presentation" tabindex="-1" value="3">设定最小宽高缩放
+                            </option>
+                            <option role="presentation" tabindex="-1" value="4">设定最小长短边缩放
+                            </option>
+                            <option role="presentation" tabindex="-1" value="5">设定最小长短边缩放，居中裁剪
+                            </option>
+                        </select>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-addon">宽(px):</div>
+                                    <input type="text" class="form-control input-sm"></input>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-addon">高(px):</div>
+                                    <input type="text" class="form-control input-sm"></input>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <ul class="nav nav-tabs">
+                    <li role="presentation" class="active"><a href="#">文字水印</a></li>
+                    <li role="presentation"><a href="#">图片水印</a></li>
+                </ul>
+                <div class="list-group">
+                    <a href="#" class="list-group-item">
+                        <div class="row">
+                            <div class="form-group col-sm-12">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-addon">水印文字:</div>
+                                    <input type="text" class="form-control input-sm"></input>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-addon">字 体:</div>
+                                    <select class=" form-control " id="mode " name="mode " datastyle="btn-default ">
+                                        <option value="宋体">宋体</option>
+                                        <option value="黑体">黑体</option>
+                                        <option value="楷体">楷体</option>
+                                        <option value="微软雅黑">微软雅黑</option>
+                                        <option value="arial">arial</option>
+                                        <option value="aldhabi">aldhabi</option>
+                                        <option value="andalus">andalus</option>
+                                        <option value="angsana new">angsana new</option>
+                                        <option value="angsanaupc">angsanaupc</option>
+                                        <option value="aparajita">aparajita</option>
+                                        <option value="arabic typesetting">arabic typesetting</option>
+                                        <option value="batang">batang</option>
+                                        <option value="browallia new">browallia new</option>
+                                        <option value="browalliaupc">browalliaupc</option>
+                                        <option value="calibri">calibri</option>
+                                        <option value="cambria">cambria</option>
+                                        <option value="candara">candara</option>
+                                        <option value="comic sans ms">comic sans ms</option>
+                                        <option value="consolas">consolas</option>
+                                        <option value="constantia">constantia</option>
+                                        <option value="corbel">corbel</option>
+                                        <option value="cordia new">cordia new</option>
+                                        <option value="cordiaupc">cordiaupc</option>
+                                        <option value="courier new">courier new</option>
+                                        <option value="courier">courier</option>
+                                        <option value="daunpenh">daunpenh</option>
+                                        <option value="david">david</option>
+                                        <option value="dfkai-sb">dfkai-sb</option>
+                                        <option value="dilleniaupc">dilleniaupc</option>
+                                        <option value="dokchampa">dokchampa</option>
+                                        <option value="ebrima">ebrima</option>
+                                        <option value="estrangelo edessa">estrangelo edessa</option>
+                                        <option value="eucrosiaupc">eucrosiaupc</option>
+                                        <option value="euphemia">euphemia</option>
+                                        <option value="fangsong">fangsong</option>
+                                        <option value="fixedsys">fixedsys</option>
+                                        <option value="franklin gothic medium">franklin gothic medium</option>
+                                        <option value="frankruehl">frankruehl</option>
+                                        <option value="freesiaupc">freesiaupc</option>
+                                        <option value="gabriola">gabriola</option>
+                                        <option value="gadugi">gadugi</option>
+                                        <option value="gautami">gautami</option>
+                                        <option value="georgia">georgia</option>
+                                        <option value="gisha">gisha</option>
+                                        <option value="gulim">gulim</option>
+                                        <option value="impact">impact</option>
+                                        <option value="irisupc">irisupc</option>
+                                        <option value="iskoola pota">iskoola pota</option>
+                                        <option value="jasmineupc">jasmineupc</option>
+                                        <option value="kaiti">kaiti</option>
+                                        <option value="kalinga">kalinga</option>
+                                        <option value="kartika">kartika</option>
+                                        <option value="khmer ui">khmer ui</option>
+                                        <option value="kodchiangupc">kodchiangupc</option>
+                                        <option value="kokila">kokila</option>
+                                        <option value="lao ui">lao ui</option>
+                                        <option value="latha">latha</option>
+                                        <option value="leelawadee">leelawadee</option>
+                                        <option value="levenim mt">levenim mt</option>
+                                        <option value="lilyupc">lilyupc</option>
+                                        <option value="lucida console">lucida console</option>
+                                        <option value="lucida sans unicode">lucida sans unicode</option>
+                                        <option value="malgun gothic">malgun gothic</option>
+                                        <option value="mangal">mangal</option>
+                                        <option value="meiryo">meiryo</option>
+                                        <option value="microsoft himalaya">microsoft himalaya</option>
+                                        <option value="microsoft jhenghei">microsoft jhenghei</option>
+                                        <option value="microsoft new tai lue">microsoft new tai lue</option>
+                                        <option value="microsoft phagspa">microsoft phagspa</option>
+                                        <option value="microsoft sans serif">microsoft sans serif</option>
+                                        <option value="microsoft tai le">microsoft tai le</option>
+                                        <option value="microsoft uighur">microsoft uighur</option>
+                                        <option value="microsoft yahei">microsoft yahei</option>
+                                        <option value="microsoft yi baiti">microsoft yi baiti</option>
+                                        <option value="mingliu-extb">mingliu-extb</option>
+                                        <option value="mingliu">mingliu</option>
+                                        <option value="miriam fixed">miriam fixed</option>
+                                        <option value="miriam">miriam</option>
+                                        <option value="mongolian baiti">mongolian baiti</option>
+                                        <option value="moolboran">moolboran</option>
+                                        <option value="ms gothic">ms gothic</option>
+                                        <option value="ms mincho">ms mincho</option>
+                                        <option value="ms sans serif">ms sans serif</option>
+                                        <option value="ms serif">ms serif</option>
+                                        <option value="mv boli">mv boli</option>
+                                        <option value="myanmar text">myanmar text</option>
+                                        <option value="narkisim">narkisim</option>
+                                        <option value="nirmala ui">nirmala ui</option>
+                                        <option value="nyala">nyala</option>
+                                        <option value="palatino linotype">palatino linotype</option>
+                                        <option value="plantagenet cherokee">plantagenet cherokee</option>
+                                        <option value="raavi">raavi</option>
+                                        <option value="rod">rod</option>
+                                        <option value="sakkal majalla">sakkal majalla</option>
+                                        <option value="segoe print">segoe print</option>
+                                        <option value="segoe script">segoe script</option>
+                                        <option value="segoe ui symbol">segoe ui symbol</option>
+                                        <option value="segoe ui">segoe ui</option>
+                                        <option value="shonar bangla">shonar bangla</option>
+                                        <option value="shruti">shruti</option>
+                                        <option value="simhei">simhei</option>
+                                        <option value="simplified arabic fixed">simplified arabic fixed</option>
+                                        <option value="simplified arabic">simplified arabic</option>
+                                        <option value="simsun-extb">simsun-extb</option>
+                                        <option value="simsun">simsun</option>
+                                        <option value="small fonts">small fonts</option>
+                                        <option value="sylfaen">sylfaen</option>
+                                        <option value="symbol">symbol</option>
+                                        <option value="system">system</option>
+                                        <option value="tahoma">tahoma</option>
+                                        <option value="terminal">terminal</option>
+                                        <option value="times new roman">times new roman</option>
+                                        <option value="traditional arabic">traditional arabic</option>
+                                        <option value="trebuchet ms">trebuchet ms</option>
+                                        <option value="tunga">tunga</option>
+                                        <option value="urdu typesetting">urdu typesetting</option>
+                                        <option value="utsaah">utsaah</option>
+                                        <option value="vani">vani</option>
+                                        <option value="verdana">verdana</option>
+                                        <option value="vijaya">vijaya</option>
+                                        <option value="vrinda">vrinda</option>
+                                        <option value="webdings">webdings</option>
+                                        <option value="wingdings">wingdings</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-6 ">
+                                <div class="input-group input-group-sm ">
+                                    <div class="input-group-addon ">字体大小:</div>
+                                    <input type="text " class="form-control input-sm "></input>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-addon ">字体颜色:</div>
+                                    <input type="text " class="form-control input-sm "></input>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-addon ">不透明度:</div>
+                                    <input type="text " class="form-control input-sm "></input>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <div class="form-group text-muted">水印位置:</div>
+                        <div class="row wm-loc">
+                            <div class="col-sm-6">
+                                <div class="loc"></div>
+                                <div class="loc"></div>
+                                <div class="loc"></div>
+                                <div class="loc"></div>
+                                <div class="loc"></div>
+                                <div class="loc"></div>
+                                <div class="loc"></div>
+                                <div class="loc"></div>
+                                <div class="loc"></div>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-addon ">横边距(px):</div>
+                                    <input type="text" class="form-control input-sm"></input>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-addon ">纵边距(px):</div>
+                                    <input type="text" class="form-control input-sm"></input>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-8 col-md-8 ">
+                <div class="thumbnail">
+                    <h5>
+                        <a class="form-group" href="# ">http://7xjiwi.com1.z0.glb.clouddn.com/fringe-sembolleri_59248.jpg</a>
+                    </h5>
+                    <img src="http://7xjiwi.com1.z0.glb.clouddn.com/fringe-sembolleri_59248.jpg " alt="... " />
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

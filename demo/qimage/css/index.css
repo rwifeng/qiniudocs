@@ -1,0 +1,13 @@
+.wm-loc div.loc {
+    float: left;
+    width: 32%;
+    padding-bottom: 30%;
+    /* = width for a 1:1 aspect ratio */
+    
+    margin: 0.4%;
+    background-color: #1E1E1E;
+}
+
+div.fop-url {
+    height: 60px;
+}
