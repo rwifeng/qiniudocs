@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/ufop.js"></script>
+    <title>Image Clipper</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="">ImageClipper <small>图片处理示例</small></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="index.html">图片处理</a></li>
+                    <li class="active"><a href="">图片鉴黄/鉴广告</a></li>
+                    <li><a href="img-info.html">图片信息</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://qiniu.sinaapp.com/docs/php-sdk/quick-start.html" target="_blank">快速开发指南</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 col-md-4">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">上传图片</button>
+                <div class="list-group">
+                    <a href="#" class="list-group-item sample">
+                        <div class="thumbnail">
+                            <img src="http://rwxf.qiniudn.com/fringe-sembolleri_59248.jpg?imageView2/1/w/200/h/100" alt="..." />
+                            <div class="caption">
+                                <p>fringe-sembolleri_59248.jpg</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item sample active">
+                        <div class="thumbnail">
+                            <img src="http://rwxf.qiniudn.com/2.jpg?imageView2/1/w/200/h/100" alt="..." />
+                            <div class="caption">
+                                <p>2.jpg</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item sample">
+                        <div class="thumbnail">
+                            <img src="http://rwxf.qiniudn.com/1.jpg?imageView2/1/w/200/h/100" alt="..." />
+                            <div class="caption">
+                                <p>1.png</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-8 ufop">
+                <div class="thumbnail ufop-nrop row">
+                    <h5 class="form-group">鉴黄: <a href="" target="_" ></a></h5>
+                    <pre class="nrop col-sm-8">
+                    </pre>
+                    <div class="col-sm-4 comments">
+                        <div class=" col-sm-offset-1">
+                            <div class="row msg form-group">
+                                <div></div>
+                                <div>鉴别:
+                                    <label></label>
+                                </div>
+                            </div>
+                            <div class="row review form-group">
+                                <div></div>
+                                <div>是否需要人工审核:
+                                    <label></label>
+                                </div>
+                            </div>
+                            <div class="row type form-group">
+                                <div></div>
+                                <div>检测图片类型:
+                                    <label>正常</label>
+                                </div>
+                            </div>
+                            <div class="row rate form-group">
+                                <div></div>
+                                <div>检测结果确认度:
+                                    <label>91%</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="thumbnail ufop-ad row">
+                    <h5 class="form-group">鉴广告: <a href="" target="_blank"></a></h5>
+                    <pre class="ad col-sm-8">
+                    </pre>
+                    <div class="col-sm-4 comments">
+                        <div class="col-sm-offset-1">
+                            <div class="row msg form-group">
+                                <div></div>
+                                <div>鉴别:
+                                    <label></label>
+                                </div>
+                            </div>
+                            <div class="row review form-group">
+                                <div></div>
+                                <div>是否需要人工审核:
+                                    <label></label>
+                                </div>
+                            </div>
+                            <div class="row type form-group">
+                                <div></div>
+                                <div>检测图片类型:
+                                    <label>正常</label>
+                                </div>
+                            </div>
+                            <div class="row rate form-group">
+                                <div></div>
+                                <div>检测结果确认度:
+                                    <label>91%</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<link rel="stylesheet" href="js/highlight/styles/default.css" />
+<script src="js/highlight/highlight.pack.js"></script>
+
+</html>

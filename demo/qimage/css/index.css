@@ -1,13 +1,37 @@
-.wm-loc div.loc {
+.wm-gravity div.gravity {
     float: left;
     width: 32%;
     padding-bottom: 30%;
     /* = width for a 1:1 aspect ratio */
+    /*margin: 0.4%;*/
+    /*background-color: #1E1E1E;*/
     
-    margin: 0.4%;
-    background-color: #1E1E1E;
+    border: 1px;
+    border-style: solid;
+    border-color: #ccc;
+}
+
+div.selected {
+    background-color: #286090;
 }
 
 div.fop-url {
     height: 60px;
+}
+
+div.dissolve-slider {
+    margin-top: 5px;
+}
+
+div.image {
+    min-height: 668px;
+    word-wrap: break-word;
+}
+
+div.ufop-nrop {
+    min-height: 470px;
+}
+
+div.ufop-ad {
+    min-height: 450px;
 }

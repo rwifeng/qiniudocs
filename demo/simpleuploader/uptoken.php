@@ -5,8 +5,8 @@ header('Access-Control-Allow-Origin:*');
 use Qiniu\Auth;
 
 $bucket = 'devtest';
-$accessKey = 'eSnBeEIyUqGGtidOTmsgQCwE23gjUDNJlsI6_mz9';
-$secretKey = 'd4eyXtO4JF_XaLkpNAWHnzygOcBbkx_Ywlhi8sKr';
+$accessKey = 'XI0n2kV1LYwzcxqSZQxJ7bpycxDIAXFGJMWUt_zG';
+$secretKey = '9WTmIAiwKQ2Nq6o93mfKd6VQqq56HjjLZonMWLJl';
 $auth = new Auth($accessKey, $secretKey);
 
 

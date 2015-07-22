@@ -256,7 +256,7 @@ $(function() {
         var poster = vLink + '?vframe/jpg/offset/2';
         videojs('video-embed', {
             "width": "100%",
-            "height": "100%",
+            "height": "500px",
             "controls": true,
             "autoplay": false,
             "preload": "auto",
@@ -284,6 +284,4 @@ $(function() {
         var url = $(this).data('url');
         initPlayer(url);
     });
-
-
 });

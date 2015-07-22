@@ -16,6 +16,7 @@
                     $dn = 'http://77fxsr.com2.z0.glb.qiniucdn.com/';  
                     error_log(print_r($cbody, true));
                     $url = $dn . $cbody['fname'];
+                    error_log($url);
 
                     $stat_ = file_get_contents($url . '?stat');
                     $stat = json_decode($stat_, true);
@@ -24,9 +25,9 @@
                 ?>
                 <p>上传文件的外链：<a href=<?=$url?>><?=$url?></a></p> 
                 <? if($isImage): >
-                    <img src=<?=$url?> width="700" height="400" alt=""></img>
+                    <img src=<?=$url?>  height="600px" alt=""></img>
                 <? endif;?>
-                <p><a href="http://127.0.0.1/demo/simpleuploader/index.html">返回</a></p> 
+                <p><a href="index.html">返回</a></p> 
         </div> 
     </body>
 </html>

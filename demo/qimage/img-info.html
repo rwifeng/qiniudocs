@@ -4,9 +4,10 @@
 <head lang="en">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/index.css" />
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/img-info.js"></script>
     <title>Image Clipper</title>
 </head>
 
@@ -15,17 +16,17 @@
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">ImageClipper <small>图片处理示例</small></a>
+                <a class="navbar-brand" href="">ImageClipper <small>图片处理示例</small></a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-left">
-                    <li><a href="" target="_blank">图片处理</a></li>
-                    <li class="active"><a href="" target="_blank">图片鉴黄/鉴广告</a></li>
-                    <li><a href="" target="_blank">图片信息</a></li>
+                    <li><a href="index.html">图片处理</a></li>
+                    <li><a href="ufop.html">图片鉴黄/鉴广告</a></li>
+                    <li class="active"><a href="">图片信息</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="http://qiniu.sinaapp.com/docs/php-sdk/quick-start.html" target="_blank">快速开发指南</a></li>
+                    <li><a href="../../docs/php-sdk/quick-start.html" target="_blank">快速开发指南</a></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -37,54 +38,47 @@
             <div class="col-sm-4 col-md-4">
                 <button class="btn btn-primary btn-lg btn-block" type="submit">上传图片</button>
                 <div class="list-group">
-                    <a href="#" class="list-group-item">
+                    <a href="#" class="list-group-item sample">
                         <div class="thumbnail">
-                            <img src="http://7xjiwi.com1.z0.glb.clouddn.com/fringe-sembolleri_59248.jpg?imageView2/1/w/200/h/100" alt="..." />
+                            <img src="http://rwxf.qiniudn.com/fringe-sembolleri_59248.jpg?imageView2/1/w/200/h/100" alt="..." />
                             <div class="caption">
                                 <p>fringe-sembolleri_59248.jpg</p>
                             </div>
                         </div>
                     </a>
-                    <a href="#" class="list-group-item active">
+                    <a href="#" class="list-group-item sample active">
                         <div class="thumbnail">
-                            <img src="http://7xjiwi.com1.z0.glb.clouddn.com/2.jpg?imageView2/1/w/200/h/100" alt="..." />
+                            <img src="http://rwxf.qiniudn.com/2.jpg?imageView2/1/w/200/h/100" alt="..." />
                             <div class="caption">
                                 <p>2.jpg</p>
                             </div>
                         </div>
                     </a>
-                    <a href="#" class="list-group-item">
+                    <a href="#" class="list-group-item sample">
                         <div class="thumbnail">
-                            <img src="http://7xjiwi.com1.z0.glb.clouddn.com/4.pic.jpg?imageView2/1/w/200/h/100" alt="..." />
+                            <img src="http://rwxf.qiniudn.com/1.jpg?imageView2/1/w/200/h/100" alt="..." />
                             <div class="caption">
-                                <p>4.pic.jpg</p>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#" class="list-group-item">
-                        <div class="thumbnail">
-                            <img src="http://7xjiwi.com1.z0.glb.clouddn.com/500_06263640-3193-9hmk-b66d-n204a17kf3mn.jpg?imageView2/1/w/200/h/100" alt="..." />
-                            <div class="caption">
-                                <p>500_06263640-3193-9hmk-b66d-n204a17kf3mn.jpg</p>
+                                <p>1.png</p>
                             </div>
                         </div>
                     </a>
                 </div>
             </div>
-            <div class="col-sm-8 ufop">
-                <div class="thumbnail row">
-                    <pre class="nrop col-sm-8">
+            <div class="col-sm-8 image">
+                <div class="thumbnail imageInfo row">
+                    <h5 class="form-group">图片基本信息: <a href="" target="_" ></a></h5>
+                    <pre class="imageInfo">
                     </pre>
-                    <div class="col-sm-4">
-                        <div>abc</div>
-                    </div>
                 </div>
-                <div class="thumbnail row">
-                    <pre class="ad col-sm-8">
+                <div class="thumbnail imageAve row">
+                    <h5 class="form-group">图片主色调: <a href="" target="_" ></a></h5>
+                    <pre class="imageAve">
                     </pre>
-                    <div class="col-sm-4">
-                        <div>abc</div>
-                    </div>
+                </div>
+                <div class="thumbnail exif row">
+                    <h5 class="form-group">图片EXIF信息: <a href="" target="_blank"></a></h5>
+                    <pre class="exif">
+                    </pre>
                 </div>
             </div>
         </div>

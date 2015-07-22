@@ -14,11 +14,11 @@
 
 
 ```html
-  <form method="post" action="http://up.qiniu.com" enctype="multipart/form-data">
-    <input name="token" type="hidden" value="<upload_token>">
-    <input name="file" type="file" />
-    <input type="submit" value="上传"/>
-  </form>
+<form method="post" action="http://up.qiniu.com" enctype="multipart/form-data">
+  <input name="token" type="hidden" value="<upload_token>">
+  <input name="file" type="file" />
+  <input type="submit" value="上传"/>
+</form>  
 ```
 
 ### 上传动作
@@ -28,16 +28,16 @@
 关键代码如下所示：
 
 ```php
-  use Qiniu\Auth;
+	use Qiniu\Auth;
 
-  $bucket = '<your_bucket>';
-  $accessKey = '<your_access_key>';
-  $secretKey = '<your_secret_key>';
-  $auth = new Auth($accessKey, $secretKey);
+	$bucket = '<your_bucket>';
+	$accessKey = '<your_access_key>';
+	$secretKey = '<your_secret_key>';
+	$auth = new Auth($accessKey, $secretKey);
 
-  $upToken = $auth->uploadToken($bucket);
+	$upToken = $auth->uploadToken($bucket);
 
-  echo $upToken;
+	echo $upToken;
 ```
 
 可以看出，以上代码主要做了以下几步工作：
@@ -85,7 +85,7 @@
 
 #### 帐号验证
 
-```
+```http
 POST /login.php HTTP/1.1
 HOST: demos.qiniu.io
 Accept: */*
@@ -97,7 +97,7 @@ uname=<username>&pwd=<password>
 
 #### 获取文件列表
 
-```
+```http
 POST /files.php HTTP/1.1
 HOST: demos.qiniu.io
 Accept: */*
@@ -110,7 +110,7 @@ Content-Type: application/x-www-form-urlencoded
 
 因为移动端并不知道 AK/SK 信息，客户端在需要上传文件时都需要向业务服务器发起一个获取上传授权的请求。
 
-```
+```http
 POST /uptoken.php HTTP/1.1
 HOST: demos.qiniu.io
 Accept: */*
@@ -123,7 +123,7 @@ Content-Type: application/x-www-form-urlencoded
 	
 移动端会直接上传文件到云存储服务，因此业务服务器不需要提供上传接口，但是需要提供一个供云存储服务在接收到文件后的回调接口。回调接口的响应内容会由云存储服务返回给移动端。
 
-```
+```http
 POST /callback.php HTTP/1.1
 HOST: demos.qiniu.io
 Accept: */*
@@ -355,7 +355,7 @@ echo json_encode($resp);
 
 前端页面使用 [Bootstrap](http://getbootstrap.com/) 的缩略图控件实现，并使用 [Smarty](http://www.smarty.net/) 模板技术来循环生成最终页面：
 
-```html
+```smarty
   {foreach from=$files item=file}
   <tr>
       <td><a href="{$file[uid]}">{$file["uid"]}</a></td>
@@ -415,7 +415,7 @@ $smarty->display('index.tpl'); // 开始生成显示页面
 
 生成展示用列表的关键代码片段如下所示：
 
-```html
+```smarty
 <div class="list-group">
         {section name="fn" loop=$pics}  
         <a href="index.php?sn={$pics[fn]['key']}" class="list-group-item{if {$sn} == {$pics[fn]['key']}} active{/if}">

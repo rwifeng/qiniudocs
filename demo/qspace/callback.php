@@ -18,10 +18,10 @@ $ok = $stmt->execute(array('uid' => $uid, 'fname' => $fname, 'fkey' => $fkey, 'c
 header('Content-Type: application/json');
 if (!$ok)
 {
-   $resp = $DB->errorInfo();
-   http_response_code(500);
-   echo json_encode($resp);
-   return;
+	$resp = $DB->errorInfo();
+	http_response_code(500);
+	echo json_encode($resp);
+	return;
 }
 
 $resp = array('ret' => 'success');

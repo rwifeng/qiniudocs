@@ -1,156 +1,155 @@
 <!DOCTYPE html>
 <html>
+
 <head lang="en">
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/js-sdk/src/qiniu.min.js"></script>
     <title>Image Clipper</title>
 </head>
+
 <body>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">数据访问信息</h4>
-            </div>
-            <form action="login.php" method="post" enctype="multipart/form-data" >
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="ak">AccessKey</label>
-                        <input type="text" class="form-control" id="ak" name="ak" placeholder="Access key" value="{$ak}">
-                        <span id="helpBlock1" class="help-block">AK/SK可以在<a href="https://portal.qiniu.com/setting/key" target="_blank">密钥管理</a>页面获取。 </span>
-                    </div>
-                    <div class="form-group">
-                        <label for="sk">SecretKey</label>
-                        <input type="text" class="form-control" id="sk" name="sk" placeholder="Secret key" value="{$sk}">
-                    </div>
-                    <div class="form-group">
-                        <label for="bucket">空间</label>
-                        <input type="text" class="form-control" id="bucket" name="bucket" placeholder="空间" value="{$bucket}">
-                        <span id="helpBlock2" class="help-block">请在<a href="https://portal.qiniu.com/" target="_blank">管理平台</a>确认填写的空间已存在。 </span>
-                    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">数据访问信息</h4>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="summit" class="btn btn-primary">提交</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">ImageClipper <small>图片处理示例</small></a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="http://qiniu.sinaapp.com/docs/php-sdk/quick-start.html" target="_blank">快速开发指南</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">帐号信息<span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="https://portal.qiniu.com/setting/key" target="_blank">公钥: {$ak}</a> </li>
-                        <li><a href="https://portal.qiniu.com/setting/key" target="_blank">私钥: {$sk}</a></li>
-                        <li><a href="https://portal.qiniu.com/bucket/qiniudemo/resource#1" target="_blank">空间: {$bucket}</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#" data-toggle="modal" data-target="#myModal">更换帐号</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-
-    </div><!-- /.container-fluid -->
-</nav>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-3 col-md-3">
-
-            <button class="btn btn-primary btn-lg btn-block" type="submit">上传图片</button>
-
-            <div class="list-group">
-
-                <a href="#" class="list-group-item">
-                    <div class="thumbnail">
-                        <img src="http://7xjiwi.com1.z0.glb.clouddn.com/fringe-sembolleri_59248.jpg?imageView2/1/w/200/h/100" alt="..."/>
-                        <div class="caption">
-                            <p>fringe-sembolleri_59248.jpg</p>
+                <form action="login.php" method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="ak">AccessKey</label>
+                            <input type="text" class="form-control" id="ak" name="ak" placeholder="Access key" value="{$ak}">
+                            <span id="helpBlock1" class="help-block">AK/SK可以在<a href="https://portal.qiniu.com/setting/key" target="_blank">密钥管理</a>页面获取。 </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="sk">SecretKey</label>
+                            <input type="text" class="form-control" id="sk" name="sk" placeholder="Secret key" value="{$sk}">
+                        </div>
+                        <div class="form-group">
+                            <label for="bucket">空间</label>
+                            <input type="text" class="form-control" id="bucket" name="bucket" placeholder="空间" value="{$bucket}">
+                            <span id="helpBlock2" class="help-block">请在<a href="https://portal.qiniu.com/" target="_blank">管理平台</a>确认填写的空间已存在。 </span>
                         </div>
                     </div>
-                </a>
-                <a href="#" class="list-group-item active">
-                    <div class="thumbnail">
-                        <img src="http://7xjiwi.com1.z0.glb.clouddn.com/2.jpg?imageView2/1/w/200/h/100" alt="..."/>
-                        <div class="caption">
-                            <p>2.jpg</p>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="summit" class="btn btn-primary">提交</button>
                     </div>
-                </a>
-                <a href="#" class="list-group-item">
-                    <div class="thumbnail">
-                        <img src="http://7xjiwi.com1.z0.glb.clouddn.com/4.pic.jpg?imageView2/1/w/200/h/100" alt="..."/>
-                        <div class="caption">
-                            <p>4.pic.jpg</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="list-group-item">
-                    <div class="thumbnail">
-                        <img src="http://7xjiwi.com1.z0.glb.clouddn.com/500_06263640-3193-9hmk-b66d-n204a17kf3mn.jpg?imageView2/1/w/200/h/100" alt="..."/>
-                        <div class="caption">
-                            <p>500_06263640-3193-9hmk-b66d-n204a17kf3mn.jpg</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-sm-9 col-md-9">
-            <div class="thumbnail">
-                <form class="form-inline">
-                    <div class="form-group">
-                        <div>
-                            <label class="control-label">图片处理模式:</label>
-                            <!-- Single button -->
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    等比缩放 <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">等比缩放</a></li>
-                                    <li><a href="#">缩放填满后裁剪</a></li>
-                                    <li><a href="#">缩放至填满区域</a></li>
-                                    <li><a href="#">缩放进区域</a></li>
-                                    <li><a href="#">缩放进区域后裁剪</a></li>
-                                </ul>
-                            </div>
-                            <input type="text" class="form-control" placeholder="宽度"/>
-                            <input type="text" class="form-control" placeholder="高度"/>
-                            <a href="http://developer.qiniu.com/docs/v6/api/reference/fop/image/imageview2.html" target="_blank">参数说明</a>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-default">应用</button>
                 </form>
-                <div class="caption">
-                    <h3>fringe-sembolleri_59248.jpg</h3>
-                </div>
-                <img src="http://7xjiwi.com1.z0.glb.clouddn.com/fringe-sembolleri_59248.jpg" alt="..."/>
             </div>
         </div>
     </div>
-</div>
-
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">ImageClipper <small>图片处理示例</small></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://qiniu.sinaapp.com/docs/php-sdk/quick-start.html" target="_blank">快速开发指南</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">帐号信息<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="https://portal.qiniu.com/setting/key" target="_blank">公钥: {$ak}</a> </li>
+                            <li><a href="https://portal.qiniu.com/setting/key" target="_blank">私钥: {$sk}</a></li>
+                            <li><a href="https://portal.qiniu.com/bucket/qiniudemo/resource#1" target="_blank">空间: {$bucket}</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#" data-toggle="modal" data-target="#myModal">更换帐号</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 col-md-3">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">上传图片</button>
+                <div class="list-group">
+                    <a href="#" class="list-group-item">
+                        <div class="thumbnail">
+                            <img src="http://7xjiwi.com1.z0.glb.clouddn.com/fringe-sembolleri_59248.jpg?imageView2/1/w/200/h/100" alt="..." />
+                            <div class="caption">
+                                <p>fringe-sembolleri_59248.jpg</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item active">
+                        <div class="thumbnail">
+                            <img src="http://7xjiwi.com1.z0.glb.clouddn.com/2.jpg?imageView2/1/w/200/h/100" alt="..." />
+                            <div class="caption">
+                                <p>2.jpg</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <div class="thumbnail">
+                            <img src="http://7xjiwi.com1.z0.glb.clouddn.com/4.pic.jpg?imageView2/1/w/200/h/100" alt="..." />
+                            <div class="caption">
+                                <p>4.pic.jpg</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <div class="thumbnail">
+                            <img src="http://7xjiwi.com1.z0.glb.clouddn.com/500_06263640-3193-9hmk-b66d-n204a17kf3mn.jpg?imageView2/1/w/200/h/100" alt="..." />
+                            <div class="caption">
+                                <p>500_06263640-3193-9hmk-b66d-n204a17kf3mn.jpg</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-9 col-md-9">
+                <div class="thumbnail">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <div>
+                                <label class="control-label">图片处理模式:</label>
+                                <!-- Single button -->
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        等比缩放 <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">等比缩放</a></li>
+                                        <li><a href="#">缩放填满后裁剪</a></li>
+                                        <li><a href="#">缩放至填满区域</a></li>
+                                        <li><a href="#">缩放进区域</a></li>
+                                        <li><a href="#">缩放进区域后裁剪</a></li>
+                                    </ul>
+                                </div>
+                                <input type="text" class="form-control" placeholder="宽度" />
+                                <input type="text" class="form-control" placeholder="高度" />
+                                <a href="http://developer.qiniu.com/docs/v6/api/reference/fop/image/imageview2.html" target="_blank">参数说明</a>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-default">应用</button>
+                    </form>
+                    <div class="caption">
+                        <h3>fringe-sembolleri_59248.jpg</h3>
+                    </div>
+                    <img src="http://7xjiwi.com1.z0.glb.clouddn.com/fringe-sembolleri_59248.jpg" alt="..." />
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>

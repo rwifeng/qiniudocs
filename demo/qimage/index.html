@@ -4,8 +4,13 @@
 <head lang="en">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/js-sdk/src/qiniu.js"></script>
+    <script type="text/javascript" src="js/jscolor/jscolor.js"></script>
+    <script type="text/javascript" src="js/noUiSlider/nouislider.min.js"></script>
+    <link rel="stylesheet" href="js/noUiSlider/nouislider.min.css" />
     <link rel="stylesheet" href="css/index.css" />
     <title>Image Clipper</title>
 </head>
@@ -16,14 +21,14 @@
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">ImageClipper <small>图片处理示例</small></a>
+                <a class="navbar-brand" href="">ImageClipper <small>图片处理示例</small></a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-left">
-                    <li class="active"><a href="" target="_blank">图片处理</a></li>
-                    <li><a href="" target="_blank">图片鉴黄/鉴广告</a></li>
-                    <li><a href="" target="_blank">图片信息</a></li>
+                    <li class="active"><a href="">图片处理</a></li>
+                    <li><a href="ufop.html">图片鉴黄/鉴广告</a></li>
+                    <li><a href="img-info.html">图片信息</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="http://qiniu.sinaapp.com/docs/php-sdk/quick-start.html" target="_blank">快速开发指南</a></li>
@@ -37,10 +42,10 @@
         <div class="row">
             <div class="col-sm-4 col-md-4">
                 <button class="btn btn-primary btn-lg btn-block" type="submit">上传图片</button>
-                <div class="list-group">
+                <div class="list-group imageview">
                     <a href="#" class="list-group-item">
                         <div class="form-group text-muted">模式:</div>
-                        <select class="form-control" id="mode" name="mode" datastyle="btn-default">
+                        <select class="form-control img-mode" datastyle="btn-default">
                             <option role="presentation" tabindex="-1" value="0">设定最大长短边缩放
                             </option>
                             <option role="presentation" tabindex="-1" value="1" selected="selected">设定最小宽高缩放，居中裁剪
@@ -60,29 +65,29 @@
                             <div class="form-group col-sm-6">
                                 <div class="input-group input-group-sm">
                                     <div class="input-group-addon">宽(px):</div>
-                                    <input type="text" class="form-control input-sm"></input>
+                                    <input type="text" class="form-control input-sm" data-op='w'></input>
                                 </div>
                             </div>
                             <div class="form-group col-sm-6">
                                 <div class="input-group input-group-sm">
                                     <div class="input-group-addon">高(px):</div>
-                                    <input type="text" class="form-control input-sm"></input>
+                                    <input type="text" class="form-control input-sm" data-op='h'></input>
                                 </div>
                             </div>
                         </div>
                     </a>
                 </div>
                 <ul class="nav nav-tabs">
-                    <li role="presentation" class="active"><a href="#">文字水印</a></li>
-                    <li role="presentation"><a href="#">图片水印</a></li>
+                    <li role="presentation" class="nav-wm nav-wm-text active" data-mode="2"><a href="#">文字水印</a></li>
+                    <li role="presentation" class="nav-wm nav-wm-image" data-mode="1"><a href="#">图片水印</a></li>
                 </ul>
-                <div class="list-group">
-                    <a href="#" class="list-group-item">
+                <div class="list-group wm">
+                    <a href="#" class="list-group-item wm-text">
                         <div class="row">
                             <div class="form-group col-sm-12">
                                 <div class="input-group input-group-sm">
                                     <div class="input-group-addon">水印文字:</div>
-                                    <input type="text" class="form-control input-sm"></input>
+                                    <input type="text" class="form-control input-sm" data-op="text"></input>
                                 </div>
                             </div>
                         </div>
@@ -90,7 +95,7 @@
                             <div class="form-group col-sm-6">
                                 <div class="input-group input-group-sm">
                                     <div class="input-group-addon">字 体:</div>
-                                    <select class=" form-control " id="mode " name="mode " datastyle="btn-default ">
+                                    <select class="form-control" datastyle="btn-default" data-op="font">
                                         <option value="宋体">宋体</option>
                                         <option value="黑体">黑体</option>
                                         <option value="楷体">楷体</option>
@@ -217,10 +222,10 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group col-sm-6 ">
+                            <div class="form-group col-sm-6">
                                 <div class="input-group input-group-sm ">
                                     <div class="input-group-addon ">字体大小:</div>
-                                    <input type="text " class="form-control input-sm "></input>
+                                    <input type="text " class="form-control input-sm" data-op="fontsize" value="1000"></input>
                                 </div>
                             </div>
                         </div>
@@ -228,57 +233,71 @@
                             <div class="form-group col-sm-6">
                                 <div class="input-group input-group-sm">
                                     <div class="input-group-addon ">字体颜色:</div>
-                                    <input type="text " class="form-control input-sm "></input>
+                                    <input type="text" class="form-control input-sm color {hash:true, pickerMode:'HSV', pickerFaceColor:'transparent', pickerFace:3, pickerBorder:0, pickerInsetColor:'black'} " data-op="fill"></input>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item wm-image" style="display: none;">
+                        <div class="row">
+                            <div class="col-sm-12 form-group">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-addon">图片地址:</div>
+                                    <input type="text" value="http://www.b1.qiniudn.com/images/logo-2.png" class="form-control input-sm" data-op="image"></input>
                                 </div>
                             </div>
                         </div>
                     </a>
                     <a href="#" class="list-group-item">
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-5">
                                 <div class="input-group input-group-sm">
-                                    <div class="input-group-addon ">不透明度:</div>
-                                    <input type="text " class="form-control input-sm "></input>
+                                    <div class="input-group-addon">不透明度:</div>
+                                    <input type="text" value="100" class="form-control input-sm dissolve" data-op="dissolve"></input>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 dissolve-slider">
+                                <div id='slider-tooltip' class="input-group-sm">
                                 </div>
                             </div>
                         </div>
                     </a>
                     <a href="#" class="list-group-item">
                         <div class="form-group text-muted">水印位置:</div>
-                        <div class="row wm-loc">
+                        <div class="row wm-gravity">
                             <div class="col-sm-6">
-                                <div class="loc"></div>
-                                <div class="loc"></div>
-                                <div class="loc"></div>
-                                <div class="loc"></div>
-                                <div class="loc"></div>
-                                <div class="loc"></div>
-                                <div class="loc"></div>
-                                <div class="loc"></div>
-                                <div class="loc"></div>
+                                <div class="gravity" data-gravity="NorthWest"></div>
+                                <div class="gravity" data-gravity="North"></div>
+                                <div class="gravity" data-gravity="NorthEast"></div>
+                                <div class="gravity" data-gravity="West"></div>
+                                <div class="gravity" data-gravity="Center"></div>
+                                <div class="gravity" data-gravity="East"></div>
+                                <div class="gravity" data-gravity="SouthWest"></div>
+                                <div class="gravity" data-gravity="South"></div>
+                                <div class="gravity selected" data-gravity="SouthEast"></div>
                             </div>
-                            <div class="form-group col-sm-6">
+                            <div class="form-group col-sm-6 dx">
                                 <div class="input-group input-group-sm">
-                                    <div class="input-group-addon ">横边距(px):</div>
-                                    <input type="text" class="form-control input-sm"></input>
+                                    <div class="input-group-addon">横边距(px):</div>
+                                    <input type="text" class="form-control input-sm" data-op="dx"></input>
                                 </div>
                             </div>
-                            <div class="form-group col-sm-6">
+                            <div class="form-group col-sm-6 dy">
                                 <div class="input-group input-group-sm">
-                                    <div class="input-group-addon ">纵边距(px):</div>
-                                    <input type="text" class="form-control input-sm"></input>
+                                    <div class="input-group-addon">纵边距(px):</div>
+                                    <input type="text" class="form-control input-sm" data-op="dy"></input>
                                 </div>
                             </div>
                         </div>
                     </a>
                 </div>
             </div>
-            <div class="col-sm-8 col-md-8 ">
-                <div class="thumbnail">
-                    <h5>
-                        <a class="form-group" href="# ">http://7xjiwi.com1.z0.glb.clouddn.com/fringe-sembolleri_59248.jpg</a>
-                    </h5>
-                    <img src="http://7xjiwi.com1.z0.glb.clouddn.com/fringe-sembolleri_59248.jpg " alt="... " />
+            <div class="col-sm-8 col-md-8">
+                <div class="thumbnail image">
+                    <div class="form-group">
+                        <h5><label>图片地址:</label> <a id="img-link"  href="# ">http://rwxf.qiniudn.com/1234.jpg</a></h5>
+                    </div>
+                    <img id="img-dsp" src="http://rwxf.qiniudn.com/1234.jpg" alt="... " />
                 </div>
             </div>
         </div>
