@@ -56,6 +56,10 @@ $(function() {
         refresh();
     });
 
+    $('select').on('change', function() {
+        refresh();
+    });
+
 
     // refresh watermark url
     var refresh = function() {
