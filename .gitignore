@@ -15,3 +15,6 @@
 
 # For  Intellij IDE
 **/.idea
+
+# For  gizp
+**/.gz
