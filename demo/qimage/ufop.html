@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="css/index.css" />
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/plupload/plupload.full.min.js"></script>
+    <script type="text/javascript" src="js/plupload/i18n/zh_CN.js"></script>
+    <script type="text/javascript" src="js/js-sdk/src/qiniu.min.js"></script>
     <script src="js/ufop.js"></script>
     <title>Image Clipper</title>
 </head>
@@ -36,7 +39,9 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-4 col-md-4">
-                <button class="btn btn-primary btn-lg btn-block" type="submit">上传图片</button>
+                <div id="container">
+                    <button id="pickfiles" class="btn btn-primary btn-lg btn-block" type="submit">上传图片</button>
+                </div>
                 <div class="list-group">
                     <a href="#" class="list-group-item sample">
                         <div class="thumbnail">

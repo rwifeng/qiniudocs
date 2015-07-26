@@ -64,7 +64,7 @@
 ###更多示例
 
 * 小文件上传 （[源代码](https://github.com/rwifeng/qiniudocs/tree/master/demo/simpleuploader) - [在线演示](../../demo/simpleuploader)）
-* 图片处理 （[源代码](https://github.com/rwifeng/qiniudocs/tree/master/demo/imageclipper) - [在线演示](../../demo/imageclipper)）
+* 图片处理 （[源代码](https://github.com/rwifeng/qiniudocs/tree/master/demo/imageclipper) - [在线演示](../../demo/qimage/index.html)）
 * 一个完整的移动应用 （[源代码](https://github.com/simon-liubin/android-demo) - [移动端 Android 安装包](http://rwxf.qiniudn.com/android-demo.apk) - [管理页面](../../demo/qspace)） 
 * 视频处理和转码 （[源代码](https://github.com/rwifeng/qiniudocs/tree/master/demo/qav) - [在线演示](../../demo/qav/index.php)）
 
