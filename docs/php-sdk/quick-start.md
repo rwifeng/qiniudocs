@@ -308,6 +308,7 @@ $policy = array(
 $upToken = $auth->uploadToken($bucket, null, 3600, $policy);
 
 header('Access-Control-Allow-Origin:*');
+echo $upToken;
 ```
 
 #### 回调
@@ -345,15 +346,40 @@ $resp = array('ret' => 'success');
 echo json_encode($resp);
 ```
 
-### 服务测试
-
-在开发和部署完成后，我们可以使用一些通用的测试工具来确认这些服务都已经可以正常工作。推荐的工具为 [Paw](https://luckymarmot.com/paw) 。
 
 ### 服务监控
 
-为了确认服务的正常运行，我们还实现了一个简单的监控页面以查看所有上传的图片。该页面假设用户名为`admin`的管理员才有权访问。
+为了确认服务的正常运行，我们还实现了一个简单的监控页面以查看所有上传的图片。该页面假设`admin`的管理员才有权访问。
+后端代码就是将用户上传的文件从数据库中列取出来。
 
-前端页面使用 [Bootstrap](http://getbootstrap.com/) 的缩略图控件实现，并使用 [Smarty](http://www.smarty.net/) 模板技术来循环生成最终页面：
+```php
+<?php
+require_once 'vendor/autoload.php';
+require_once 'db.php';
+
+if (!$_SESSION['logged'])
+{
+	header('login.php');
+}
+
+$id = $_POST['id'];
+if ($id)
+{
+	$stmt = $DB->prepare('delete from files_info where id = :id');
+	$stmt->execute(array('id' => $id));
+}
+
+$stmt = $DB->prepare('select * from files_info');
+$stmt->execute();
+$files = $stmt->fetchAll();
+
+$smarty = new Smarty();
+$smarty->assign('files', $files);
+
+$smarty->display('file_mgr.tpl');
+```
+
+前端页面使用 [Bootstrap](http://getbootstrap.com/) 的控件实现，并使用 [Smarty](http://www.smarty.net/) 模板技术来循环生成最终页面：
 
 ```smarty
   {foreach from=$files item=file}
@@ -382,100 +408,188 @@ echo json_encode($resp);
 
 图片内容是几乎所有互联网应用都需要管理的数据类型。我们的服务提供了比较强大的数据处理功能。本章我们讲围绕一个功能相对完备的示例来讲解图片处理的主要用法，并顺便介绍 PHP SDK 的资源管理功能。
 
-这个示例需要用户提供一对 AK/SK，并指定目标存储空间，然后会列出该存储空间中的图片内容。用户可以点选不同的图片以显示大图和查看大图信息。用户还可以选择图片处理模式，输入相应的处理参数，然后可以查看处理的结果。
+这个示例用户可以上传图片，选择图片处理模式，输入相应的处理参数，然后可以查看处理的结果。用户还可以点选不同的图片以显示图片的鉴黄信息和鉴别广告的信息， 以及获取图片的基本信息，平均色，exif信息等。
 
-下面我们分步来实现这个示例。前端实现使用了 [Bootstrap](http://getbootstrap.com/) 和 [Smarty](http://www.smarty.net/) 。
+下面我们分步来实现这个示例。前端实现使用了 [Bootstrap](http://getbootstrap.com/)和我们的[js-sdk](https://github.com/qiniupd/qiniu-js-sdk), 后端使用phpsdk生成上传的token。
 
-### 列出文件
+###  生成上传token
 
-点击右上角的菜单项后，会弹出一个模态窗口让用户输入 AK/SK 等必要的访问信息。之后会列出目标存储空间里的至多10张 JPG 格式的图片。以下是获取图片列表的实现代码：
+和之前的代码一样， 首先安装我们的phpsdk然后引入相应文件并调用接口生成上传token。
+具体php代码：
 
 ```php
-$auth = new Auth($ak, $sk);
-$bm = new BucketManager($auth);
+require_once 'vendor/autoload.php';
+require_once 'config.php';
 
-list($items, $marker, $err) = $bm->listFiles($bucket); // 尝试列举空间中的文件
+use Qiniu\Auth;
 
-if ($err != null) {
-	//echo "列举文件失败：(".$err->code().") ".$err->message();
-} else {
-	foreach ($items as $item) { // 过滤出最多10张jpg图片用于展示。
-		if ($item['mimeType'] == 'image/jpeg') {
-			$pics[] = $item;
-			if (count($pics) >= 10) { 
-				break;
-			}
-		}
-	}
-}
+$bucket = Config::BUCKET_NAME;
+$accessKey = Config::ACCESS_KEY;
+$secretKey = Config::SECRET_KEY;
 
-$smarty->assign('pics', $pics); // 设置为 Smarty 参数
-$smarty->display('index.tpl'); // 开始生成显示页面
+$auth = new Auth($accessKey, $secretKey);
+$upToken = $auth->uploadToken($bucket);
+
+$ret = array('uptoken' => $upToken);
+
+echo json_encode($ret);
+
 ```
 
-生成展示用列表的关键代码片段如下所示：
 
-```smarty
-<div class="list-group">
-        {section name="fn" loop=$pics}  
-        <a href="index.php?sn={$pics[fn]['key']}" class="list-group-item{if {$sn} == {$pics[fn]['key']}} active{/if}">
-            <div class="thumbnail">
-                <img src="http://{$domain}/{$pics[fn]['key']}?imageView2/1/w/200/h/100" alt="{$pics[fn]['key']}"/>
-                <div class="caption">
-                    <p>{$pics[fn]['key']}</p>
-                </div>
-            </div>
-        </a>
-        {/section}
- </div>
-```
-
-### 图片信息和编辑
-
-图片编辑的过程非常简单，就是以表单方式获取编辑参数，然后将该参数作为图片的参数即可，不需要用到 SDK 的功能。如下所示：
+上传部分相关的html代码：
 
 ```html
-{if count($pics) > 0}
-    <img src="http://{$domain}/{$sn}{if isset($mode)}?imageView2/{$mode}{if isset($width)}/w/{$width}{/if}{if isset($height)}/h/{$height}{/if}{/if}" alt="{$sn}"/>
-{/if}
+<div id="container">
+     <button id="pickfiles" class="btn btn-primary btn-lg btn-block" type="submit">上传图片</button>
+</div>                
 ```
 
-其中的变量比如`$domain`、`$mode`都是在 PHP 代码中以类似于如下的语句设置：
+上传对应的调用jssdk相关代码如下所示：
 
-```php
-$smarty->assign('domain', $domain);
+```js
+var uploader = Qiniu.uploader({
+    runtimes: 'html5,flash,html4', //上传模式,依次退化
+    browse_button: 'pickfiles', //上传选择的点选按钮，**必需**
+    uptoken_url: 'uptoken.php', //Ajax请求upToken的Url，**强烈建议设置**（服务端提供）
+    domain: 'http://rwxf.qiniudn.com/', //bucket 域名，下载资源时用到，**必需**
+    container: 'container', //上传区域DOM ID，默认是browser_button的父元素，
+    max_file_size: '100mb', //最大文件体积限制
+    flash_swf_url: 'plupload/Moxie.swf', //引入flash,相对路径
+    max_retries: 3, //上传失败最大重试次数
+    dragdrop: true, //开启可拖曳上传
+    drop_element: 'container', //拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
+    chunk_size: '4mb', //分块上传时，每片的体积
+    auto_start: true, //选择文件后自动上传，若关闭需要自己绑定事件触发上传
+    init: {
+        'UploadProgress': function(up, file) {
+            $('#pickfiles').prop('disabled', true).html('图片上传中...');
+        },
+        'FileUploaded': function(up, file, info) {
+
+            $('#pickfiles').prop('disabled', false).html('上传图片');
+            var res = JSON.parse(info);
+            imgUrl = up.getOption('domain') + res.key;
+            refresh(imgUrl);
+        },
+        'Error': function(up, err, errTip) {
+            $('#pickfiles').prop('disabled', false).html('上传图片');
+        }
+    }
+});
+
 ```
 
-完整的实现请参见本示例的源代码。
+### 图片处理
+
+图片处理的过程非常简单，就是将我们的图片处理 `fop` 以及对应的参数拼接在图片地址后面即可。 基本不需要用到 SDK 的功能，当然你也可以使用我们的jssdk进行图片地址和处理参数的拼接。
+比如一个图片
+
+```
+http://qiniuphotos.qiniudn.com/gogopher.jpg
+```
+![原图](http://qiniuphotos.qiniudn.com/gogopher.jpg)
+
+```
+现在我们对这个图片进行200x200的等比缩放，然后再进行居中剪裁: 可以使用imageView2 的mode 1
+http://qiniuphotos.qiniudn.com/gogopher.jpg?/1/w/<Width>/h/<Height>
+
+最终得到的处理后的图片为：
+http://qiniuphotos.qiniudn.com/gogopher.jpg?imageView2/1/w/200/h/200
+```
+
+![](http://qiniuphotos.qiniudn.com/gogopher.jpg?imageView2/1/w/200/h/200)
+
+
+更多处理处理规格可以参考我们的[图片处理文档](http://developer.qiniu.com/docs/v6/api/reference/fop/image/imageview2.html)
+
+### 图片信息
+* 图片基本信息
+只需要在图片外链后面拼接上  `?imageInfo`
+
+http://qiniuphotos.qiniudn.com/gogopher.jpg?imageInfo
+
+```json
+{
+	format: "jpeg",
+	width: 640,
+	height: 427,
+	colorModel: "ycbcr",
+	orientation: "Top-left"
+}
+```
+
+* 图片平均色
+只需要在图片的外链后面拼接上  `?imageAve`
+
+http://qiniuphotos.qiniudn.com/gogopher.jpg?imageAve
+
+```json
+{
+	RGB: "0x85694d"
+}
+```
+
+* 图片Exif信息
+只需在图片的外链后面拼接上 `?exif`
+
+http://qiniuphotos.qiniudn.com/gogopher.jpg?exif
+
+```json
+{
+    ApertureValue: {
+        val: "5.00 EV (f/5.7)",
+        type: 5
+    },
+    ColorSpace: {
+        val: "sRGB",
+        type: 3
+    },
+    ComponentsConfiguration: {
+        val: "- - - -",
+        type: 7
+    },
+    ...
+}
+
+```
 
 ### 高级UFOP功能
 
-我们可以对以上已经完成的示例做一些非常小的修改，就可以体验在我们 UFOP 平台提供的强大第三方数据处理服务。在本例中我们就来尝试一下[色情图片识别功能（ NROP）](http://developer.qiniu.com/docs/v6/api/reference/fop/third-party/nrop.html) 。
+除去我们官方提供的强大图片处理功能， 也可以体验我们 UFOP 平台提供的强大第三方数据处理服务。在本例中我们就来尝试一下[色情图片识别功能（ NROP）](http://developer.qiniu.com/docs/v6/api/reference/fop/third-party/nrop.html) 。
 
 要使用 NROP 功能，用户需要先在管理平台上的[应用市场](https://portal.qiniu.com/service/market)开启本功能。开启后使用方式与一般的数据处理指令完全一致（比如获取 EXIF 信息的接口），仅需要使用带 nrop 参数的 GET 请求即可，返回的 HTTP 响应内容为一个包含鉴定结果的 JSON 字符串。示例代码如下所示：
 
-```php
-$ret = Client::get("http://$domain/$sn?nrop");
-if ($ret->ok()) {
-    $json = $ret->json();
+http://qiniuphotos.qiniudn.com/gogopher.jpg?nrop
 
-    $boolarray = Array(false => 'false', true => 'true');
-
-    // 解析 json 字符串，将其中感兴趣的值压到 props 数组中。
-    $props['nrop:code(0：调用成功)'] = $json['code'];
-    $props['nrop:label(0：色情；1：性感；2：正常)'] = $json['fileList'][0]['label']; // 只包含一个文件
-    $props['nrop:rate(概率)'] = $json['fileList'][0]['rate'];
-    $props['nrop:review(人工复审?)'] = $boolarray[$json['fileList'][0]['review']];
-} else {
-	$props['nropfailure'] = $ret->body; 
+```json
+{
+    statistic: [
+        0,
+        0,
+        1
+    ],
+    reviewCount: 0,
+    fileList: [{
+        rate: 0.9946920275688171,        // 介于0-1间的浮点数，表示该图像被识别为某个分类的概率值，概率越高、机器越肯定
+        label: 2,                        // 0：色情； 1：性感； 2：正常
+        name: "739a77baf4ff2d5eae5fe56602fc0cbe/gogopher.jpg",
+        review: false                    //是否需要人工复审该图片，鉴黄服务是否对结果确定(true：不确定，false：确定)
+    }],
+    nonce: "0.5508577267173678",
+    timestamp: 1437903830,
+    code: 0,
+    message: "success"
 }
+
 ```
 
-我们提供的完整示例已经包含了对 NROP 的调用，您可以体验一下效果。
+
+我们提供的完整示例已经包含了对 NROP 的调用，以及对广告的鉴定，您可以体验一下效果。
 
 ### 小结
 
-这个示例结束后，相信你已经比较了解我们的平台是如何支持图片内容的编辑，基本上这些动作都只是一个简单的 GET 请求即可完成，甚至都不需要依赖于 SDK。您可以查看本示例的[在线演示](../../demo/imageclipper)，或查看和下载本示例的[完整源代码]()。
+这个示例结束后，相信你已经比较了解我们的平台是如何支持图片内容的编辑，基本上这些动作都只是一个简单的 GET 请求即可完成，甚至都不需要依赖于 SDK。您可以查看本示例的[在线演示](../../demo/qimage/index.html)，或查看和下载本示例的[完整源代码](https://github.com/rwifeng/qiniudocs/tree/master/demo/qimage)。
 
 ## 音视频和流媒体
 
@@ -488,7 +602,7 @@ if ($ret->ok()) {
 1. 统一从每一个视频文件抽取一个固定时间点的画面作为预览图片;
 1. 在网页播放器中播放生成的视频文件;
 
-我们选用 [plupload]() 作为我们的上传控件，并使用 [JWPlayer]() 作为我们的网页播放器。其他采用的技术与之前的示例一致，主要是 Bootstrap 和 Smarty 。因为文件为客户端直传，因此我们也需要提供一个回调服务，以便于接收上传和转码这些异步任务的完成事件。为了简单起见，该示例就不再实现一个独立的业务数据库了，直接从目标存储空间获取文件信息。
+我们选用 [plupload](http://www.plupload.com/) 作为我们的上传控件，并使用 [videojs](http://www.videojs.com/) 作为我们的网页播放器。其他采用的技术与之前的示例一致，主要是 Bootstrap 和 Smarty 。因为文件为客户端直传，因此我们也需要提供一个回调服务，以便于接收上传和转码这些异步任务的完成事件。为了简单起见，该示例就不再实现一个独立的业务数据库了，直接从目标存储空间获取文件信息。
 
 ### 大文件上传
 
@@ -498,31 +612,6 @@ if ($ret->ok()) {
 ### 上传后自动转码
 
 我们可以通过设置上传策略来通知云存储服务在上传完成后自动发起一个异步的任务。上传策略在调用上传接口时作为参数传入。
-
-```js 
-var getUpToken = function() {
-  if (!op.uptoken) {
-    var ajax = that.createAjax();
-    ajax.open('GET', that.uptoken_url, true);
-    ajax.setRequestHeader("If-Modified-Since", "0");
-    ajax.onreadystatechange = function() {
-      if (ajax.readyState === 4 && ajax.status === 200) {
-        var res = that.parseJSON(ajax.responseText);
-        that.token = res.uptoken;
-      }
-    };
-    ajax.send();
-  } else {
-    that.token = op.uptoken;
-  }
-};
-
-var uploader = new plupload.Uploader(option);
-uploader.bind('Init', function(up, params) {
-  getUpToken();
-});
-```
-
 这里的转码过程需要支持转为 HLS 格式，并且在转码后打上视频水印。具体生成上传策略的代码为：
 
 ```php
