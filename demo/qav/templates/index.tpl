@@ -18,18 +18,9 @@
 
 <body>
     <div class="container">
-        <div class="text-left col-md-12 wrapper">
+        <div class="text-left col-md-12 ">
             <h1 class="text-left col-md-12 ">
             七牛云存储 - 视频Demo
-                <!--  
-                    <a class="btn btn-default view_code" id="show_code">
-                        查看初始化代码
-                    </a>
-                    <a class="btn btn-default view_github" href="https://github.com/qiniupd/qiniu-js-sdk" target="_blank">
-                        <img src="http://qtestbucket.qiniudn.com/GitHub-Mark-32px.png">
-                        View Source on Github
-                    </a>
-                -->
             </h1>
             <input type="hidden" id="domain" value="{$domain}">
             <input type="hidden" id="uptoken_url" value="{$uptokenUrl}">
@@ -62,7 +53,7 @@
                             <td class="progressName">1.mp4
                                 <div class="Wrapper">
                                     <input data-url="http://devtest.qiniudn.com/1.mp4" class="origin-video btn  btn-primary play-btn" value="播放原视频" type="button">
-                                    <input data-url="http://devtest.qiniudn.com/0JmbiheSQfkOB1X6h40wCvDb0YY%3D%2FlolDkdQ10vxTTlQMDruPvj1VzNUi" class=" btn  btn-info play-btn" style="" value="播放转码后视频" type="button">
+                                    <input data-url="http://devtest.qiniudn.com/0JmbiheSQfkOB1X6h40wCvDb0YY%3D%2FlolDkdQ10vxTTlQMDruPvj1VzNUi" class="btn btn-info play-btn" value="播放转码后视频" type="button">
                                 </div>
                             </td>
                             <td class="progressFileSize">28.8 MB</td>
@@ -110,7 +101,6 @@
     <script type="text/javascript" src="js/plupload/i18n/zh_CN.js"></script>
     <script type="text/javascript" src="js/qiniu.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
-    <script type="text/javascript" src="js/sewise-player-master/player/sewise.player.min.js"></script>
     <script type="text/javascript" src="js/ui.js"></script>
 </body>
 
