@@ -25,7 +25,7 @@ $(function() {
                     '?imageView2/1/w/200/h/100';
 
 
-                $imgThumbnail = $('div.list-group a').first().clone();
+                $imgThumbnail = $('div.list-group div').first().clone();
                 $imgThumbnail.find('img').attr('src', imgUrl);
                 $imgThumbnail.find('p').html(res.key);
                 $('div.list-group').prepend($imgThumbnail);

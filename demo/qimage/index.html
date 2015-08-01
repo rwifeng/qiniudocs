@@ -39,7 +39,7 @@
                     <button id="pickfiles" class="btn btn-primary btn-lg btn-block" type="submit">上传图片</button>
                 </div>
                 <div class="list-group imageview">
-                    <a href="#" class="list-group-item">
+                    <div class="list-group-item">
                         <div class="form-group text-muted">模式:</div>
                         <select class="form-control img-mode" datastyle="btn-default">
                             <option role="presentation" tabindex="-1" value="0">设定最大长短边缩放
@@ -55,8 +55,8 @@
                             <option role="presentation" tabindex="-1" value="5">设定最小长短边缩放，居中裁剪
                             </option>
                         </select>
-                    </a>
-                    <a href="#" class="list-group-item">
+                    </div>
+                    <div class="list-group-item">
                         <div class="row">
                             <div class="form-group col-sm-6">
                                 <div class="input-group input-group-sm">
@@ -71,14 +71,14 @@
                                 </div>
                             </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
                 <ul class="nav nav-tabs">
-                    <li role="presentation" class="nav-wm nav-wm-text active" data-mode="2"><a href="#">文字水印</a></li>
-                    <li role="presentation" class="nav-wm nav-wm-image" data-mode="1"><a href="#">图片水印</a></li>
+                    <li role="presentation" class="nav-wm nav-wm-text cursor-wrapper active" data-mode="2"><a>文字水印</a></li>
+                    <li role="presentation" class="nav-wm nav-wm-image cursor-wrapper" data-mode="1"><a>图片水印</a></li>
                 </ul>
                 <div class="list-group wm">
-                    <a href="#" class="list-group-item wm-text">
+                    <div class="list-group-item wm-text">
                         <div class="row">
                             <div class="form-group col-sm-12">
                                 <div class="input-group input-group-sm">
@@ -233,8 +233,8 @@
                                 </div>
                             </div>
                         </div>
-                    </a>
-                    <a href="#" class="list-group-item wm-image" style="display: none;">
+                    </div>
+                    <div class="list-group-item wm-image" style="display: none;">
                         <div class="row">
                             <div class="col-sm-12 form-group">
                                 <div class="input-group input-group-sm">
@@ -243,8 +243,8 @@
                                 </div>
                             </div>
                         </div>
-                    </a>
-                    <a href="#" class="list-group-item">
+                    </div>
+                    <div class="list-group-item">
                         <div class="row">
                             <div class="col-sm-5">
                                 <div class="input-group input-group-sm">
@@ -253,15 +253,15 @@
                                 </div>
                             </div>
                             <div class="col-sm-6 dissolve-slider">
-                                <div id='slider-tooltip' class="input-group-sm">
+                                <div id='slider-tooltip' class="input-group-sm cursor-wrapper">
                                 </div>
                             </div>
                         </div>
-                    </a>
-                    <a href="#" class="list-group-item">
+                    </div>
+                    <div class="list-group-item">
                         <div class="form-group text-muted">水印位置:</div>
                         <div class="row wm-gravity">
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 cursor-wrapper">
                                 <div class="gravity" data-gravity="NorthWest"></div>
                                 <div class="gravity" data-gravity="North"></div>
                                 <div class="gravity" data-gravity="NorthEast"></div>
@@ -285,7 +285,7 @@
                                 </div>
                             </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-8 col-md-8">
@@ -304,7 +304,7 @@
     <script type="text/javascript" src="js/noUiSlider/nouislider.min.js"></script>
     <script type="text/javascript" src="js/plupload/plupload.full.min.js"></script>
     <script type="text/javascript" src="js/plupload/i18n/zh_CN.js"></script>
-    <script type="text/javascript" src="js/js-sdk/src/qiniu.min.js"></script>
+    <script type="text/javascript" src="js/js-sdk/src/qiniu.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
 </body>
 

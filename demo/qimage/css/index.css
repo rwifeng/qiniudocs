@@ -35,3 +35,7 @@ div.ufop-nrop {
 div.ufop-ad {
     min-height: 450px;
 }
+
+div.cursor-wrapper {
+    cursor: pointer;
+}

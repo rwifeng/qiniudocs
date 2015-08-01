@@ -1,5 +1,5 @@
 $(function() {
-    var imgUrl = '';
+    var imgUrl = 'http://rwxf.qiniudn.com/1234.jpg';
 
     var uploader = Qiniu.uploader({
         runtimes: 'html5,flash,html4', //上传模式,依次退化

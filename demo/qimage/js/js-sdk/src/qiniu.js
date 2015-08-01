@@ -826,13 +826,13 @@ function QiniuJsSDK() {
                 }
                 switch (option.fop) {
                     case 'watermark':
-                        imageUrl += this.watermark(option) ? this.watermark(option) + '|' : '';
+                        imageUrl += this.watermark(option) != false ? this.watermark(option) + '|' : '';
                         break;
                     case 'imageView2':
-                        imageUrl += this.imageView2(option) ? this.imageView2(option) + '|' : '';
+                        imageUrl += this.imageView2(option) != false ? this.imageView2(option) + '|' : '';
                         break;
                     case 'imageMogr2':
-                        imageUrl += this.imageMogr2(option) ? this.imageMogr2(option) + '|' : '';
+                        imageUrl += this.imageMogr2(option) != false ? this.imageMogr2(option) + '|' : '';
                         break;
                     default:
                         errOp = true;
