@@ -427,25 +427,22 @@ pre[class*="language-"] {
 <body>
 <h1 id="toc_0">七牛云存储PHP SDK</h1>
 
-<p>本SDK为PHP开发者提供了操作七牛云存储服务功能的能力。</p>
-
-<p>关于本SDK的概述。</p>
-
-<h2 id="toc_1">功能列表</h2>
+<p>本SDK为PHP开发者提供了操作七牛云存储服务功能的能力。PHPSDK包含了几个功能： </p>
 
 <ul>
-<li>可通过<a href="http://www.phpcomposer.com">Composer</a>安装，或者自行下载对应的zip包</li>
-<li>支持以表单方式和断点续传方式上传文件</li>
-<li>提供对管理内容进行改名、删除等管理操作</li>
-<li>可以设置在上传后自动执行后续的数据处理操作</li>
+<li>数据的上传和下载</li>
+<li>数据的管理：复制，移动，删除，获取元信息，列取文件</li>
+<li>数据的处理：图片的处理，音视频的处理，文档的处理</li>
 </ul>
 
-<h2 id="toc_2">快速上手</h2>
+<p>接下来逐步对各个功能给出响应的示例和演示。</p>
+
+<h2 id="toc_1">快速上手</h2>
 
 <ol>
 <li><p><strong>注册七牛帐号和获取密钥</strong> </p>
 
-<p>在使用SDK之前，你必须先<a href="https://portal.qiniu.com/signup">注册一个七牛帐号</a>，并<a href="https://portal.qiniu.com/setting/key">登录控制台获取一对有效的AccessKey和SecretKey</a>。请详细阅读<a href="php-sdk/security.html">安全建议建议</a>以进一步了解如何正确使用和管理密钥。</p></li>
+<p>在使用SDK之前，你必须先<a href="https://portal.qiniu.com/signup">注册一个七牛帐号</a>，并登录控制台获取一对有效的<a href="https://portal.qiniu.com/setting/key">AccessKey和SecretKey</a>。请详细阅读<a href="php-sdk/security.html">安全建议建议</a>以进一步了解如何正确使用和管理密钥。</p></li>
 <li><p><strong>环境兼容性要求</strong> </p>
 
 <p>本SDK要求你的环境安装了<strong>PHP 5.3.3+</strong>运行环境，且应带cURL扩展。安装<strong>cURL 7.16.3+</strong>。</p></li>
@@ -457,9 +454,9 @@ pre[class*="language-"] {
 <p>建议阅读<a href="php-sdk/quick-start.html">快速开发指南</a>以了解本SDK的基本使用方法，并结合相应的样例工程和<a href="php-sdk/api/index.html">API参考手册</a>以获取所有功能的详细使用方法。</p></li>
 </ol>
 
-<h2 id="toc_3">快速示例</h2>
+<h2 id="toc_2">快速示例</h2>
 
-<h3 id="toc_4">上传一个文件到七牛云存储</h3>
+<h3 id="toc_3">上传一个文件到七牛云存储</h3>
 
 <pre><code class="language-php">  &lt;?php
     require &#39;vendor/autoload.php&#39;;
@@ -487,7 +484,7 @@ pre[class*="language-"] {
     }
   </code></pre>
 
-<h3 id="toc_5">更多示例</h3>
+<h3 id="toc_4">更多示例</h3>
 
 <ul>
 <li>常见phpsdk示例    (<a href="https://github.com/qiniu/php-sdk/tree/master/examples">源代码</a>)</li>
@@ -497,7 +494,7 @@ pre[class*="language-"] {
 <li>视频处理和转码 （<a href="https://github.com/rwifeng/qiniudocs/tree/master/demo/qav">源代码</a> - <a href="../../demo/qav/index.php">在线演示</a>）</li>
 </ul>
 
-<h2 id="toc_6">开发文档</h2>
+<h2 id="toc_5">开发文档</h2>
 
 <ul>
 <li><a href="php-sdk/quick-start.html">快速开发指南</a> - 此文档介绍了使用本SDK所需要的基本概念和API</li>
@@ -505,7 +502,7 @@ pre[class*="language-"] {
 <li><a href="php-sdk/api/index.html">API参考手册</a> - 本SDK所提供的所有API的详细使用说明</li>
 </ul>
 
-<h2 id="toc_7">相关资源</h2>
+<h2 id="toc_6">相关资源</h2>
 
 <ul>
 <li><a href="http://segmentfault.com/qiniu">技术论坛</a> - 在这里你可以和其他开发者愉快的讨论如何更好的使用七牛云服务</li>

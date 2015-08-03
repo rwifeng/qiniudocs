@@ -1,9 +1,9 @@
-<!doctype html>
-<html>
+<!DOCTYPE html><html>
+
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<style>
+<title>installation</title>
+<style type="text/css">
 body {
   font-family: Helvetica, arial, sans-serif;
   font-size: 14px;
@@ -157,7 +157,7 @@ blockquote {
     margin-bottom: 0; }
 
 table {
-  width: 100%;padding: 0;border-collapse: collapse; }
+  padding: 0;border-collapse: collapse; }
   table tr {
     border-top: 1px solid #cccccc;
     background-color: white;
@@ -302,15 +302,134 @@ sup {
 	}
 }
 </style>
-<title>Qiniu SDK for PHP 安装指南</title>
+<style type="text/css">
+/**
+ * okaidia theme for JavaScript, CSS and HTML
+ * Loosely based on Monokai textmate theme by http://www.monokai.nl/
+ * @author ocodia
+ */
 
+code[class*="language-"],
+pre[class*="language-"] {
+	color: #f8f8f2;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+	font-family: Consolas, Monaco, 'Andale Mono', monospace;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+	border-radius: 0.3em;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #272822;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #f8f8f2;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #f92672;
+}
+
+.token.boolean,
+.token.number {
+	color: #ae81ff;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #a6e22e;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+	color: #f8f8f2;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function {
+	color: #e6db74;
+}
+
+.token.keyword {
+	color: #66d9ef;
+}
+
+.token.regex,
+.token.important {
+	color: #fd971f;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+</style>
 </head>
 <body>
-<h1>Qiniu SDK for PHP 安装指南</h1>
+<h1 id="toc_0">Qiniu SDK for PHP 安装指南</h1>
 
 <p>Qiniu SDK for PHP 支持以下几种安装方式。推荐的安装方式为使用 <strong>Composer</strong> 。</p>
 
-<h2>使用 Composer 安装</h2>
+<h2 id="toc_1">使用 Composer 安装</h2>
 
 <p><strong><a href="http://getcomposer.org/">Composer</a></strong> 是一个简单易用的 PHP 依赖管理工具。你可以在自己的项目中声明所依赖的外部工具库，Composer 会帮你安装这些依赖的库文件。</p>
 
@@ -319,32 +438,33 @@ sup {
 <ol>
 <li><p>安装 Composer :</p>
 
-<pre><code> curl -sS https://getcomposer.org/installer | php
-</code></pre></li>
+<pre><code>curl -sS https://getcomposer.org/installer | php</code></pre></li>
 <li><p>使用 Composer 获取 Qiniu SDK :</p>
 
-<pre><code> php composer.phar require qiniu/php-sdk
-</code></pre></li>
+<pre><code>php composer.phar require qiniu/php-sdk</code></pre></li>
 <li><p>在代码中添加对 autoload 的依赖：</p>
 
-<pre><code> &lt;?php
- require 'vendor/autoload.php';
-</code></pre></li>
+<pre><code>&lt;?php
+require &#39;vendor/autoload.php&#39;;</code></pre></li>
 </ol>
-
 
 <p>如果需要更详细的关于 Composer 的使用说明，你可以访问 Composer 的官方网站<a href="http://getcomposer.org/">http://getcomposer.org/</a>，或对应的中文网站 <a href="http://www.phpcomposer.com/">http://www.phpcomposer.com/</a>。</p>
 
-<h2>手动下载</h2>
+<h2 id="toc_2">直接下载 Composer 安装包</h2>
 
-<p>因为有些网络环境下通过 Composer 获取 Qiniu SDK 的速度较慢，开发者也可以直接下载我们准备好的符合 Composer 规范的 vendor 压缩包并在本地解压。解压后的内容和使用 Composer 方式获取到的内容完全一致，之后的使用方式也一致。</p>
+<p>鉴于某些原因, 国内的用户使用 Composer 下载依赖库比较慢，开发者也可以直接下载我们准备好的符合 Composer 规范的 vendor 压缩包并在本地解压。解压后的内容和使用 Composer 方式获取到的内容完全一致，之后的使用方式也一致。</p>
 
 <p>压缩包下载地址：<a href="http://devtools.qiniu.io/vendor.tar.gz">http://devtools.qiniu.io/vendor.tar.gz</a></p>
 
-<h2>直接使用源代码包</h2>
+<h2 id="toc_3">直接下载源代码包</h2>
 
 <p>直接下载源代码压缩包并解压是另一种 SDK 的安装方法。不过因为有版本更新的维护问题，这种安装方法并不推荐，仅作为万一 Composer 安装有问题的情况下作为一种选择。</p>
 
-<p>源代码包下载地址：<a href="https://github.com/qiniu/php-sdk/releases">https://github.com/qiniu/php-sdk/releases</a></p>
+<p>源代码包下载地址：<a href="https://github.com/qiniu/php-sdk/releases">https://github.com/qiniu/php-sdk/releases</a> </p>
+
+<script type="text/javascript">
+self="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{};var Prism=function(){var e=/\blang(?:uage)?-(?!\*)(\w+)\b/i,t=self.Prism={util:{encode:function(e){return e instanceof n?new n(e.type,t.util.encode(e.content),e.alias):"Array"===t.util.type(e)?e.map(t.util.encode):e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).match(/\[object (\w+)\]/)[1]},clone:function(e){var n=t.util.type(e);switch(n){case"Object":var a={};for(var r in e)e.hasOwnProperty(r)&&(a[r]=t.util.clone(e[r]));return a;case"Array":return e.map(function(e){return t.util.clone(e)})}return e}},languages:{extend:function(e,n){var a=t.util.clone(t.languages[e]);for(var r in n)a[r]=n[r];return a},insertBefore:function(e,n,a,r){r=r||t.languages;var i=r[e];if(2==arguments.length){a=arguments[1];for(var l in a)a.hasOwnProperty(l)&&(i[l]=a[l]);return i}var s={};for(var o in i)if(i.hasOwnProperty(o)){if(o==n)for(var l in a)a.hasOwnProperty(l)&&(s[l]=a[l]);s[o]=i[o]}return t.languages.DFS(t.languages,function(t,n){n===r[e]&&t!=e&&(this[t]=s)}),r[e]=s},DFS:function(e,n,a){for(var r in e)e.hasOwnProperty(r)&&(n.call(e,r,e[r],a||r),"Object"===t.util.type(e[r])?t.languages.DFS(e[r],n):"Array"===t.util.type(e[r])&&t.languages.DFS(e[r],n,r))}},highlightAll:function(e,n){for(var a,r=document.querySelectorAll('code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'),i=0;a=r[i++];)t.highlightElement(a,e===!0,n)},highlightElement:function(a,r,i){for(var l,s,o=a;o&&!e.test(o.className);)o=o.parentNode;if(o&&(l=(o.className.match(e)||[,""])[1],s=t.languages[l]),a.className=a.className.replace(e,"").replace(/\s+/g," ")+" language-"+l,o=a.parentNode,/pre/i.test(o.nodeName)&&(o.className=o.className.replace(e,"").replace(/\s+/g," ")+" language-"+l),s){var u=a.textContent;if(u){u=u.replace(/^(?:\r?\n|\r)/,"");var g={element:a,language:l,grammar:s,code:u};if(t.hooks.run("before-highlight",g),r&&self.Worker){var c=new Worker(t.filename);c.onmessage=function(e){g.highlightedCode=n.stringify(JSON.parse(e.data),l),t.hooks.run("before-insert",g),g.element.innerHTML=g.highlightedCode,i&&i.call(g.element),t.hooks.run("after-highlight",g)},c.postMessage(JSON.stringify({language:g.language,code:g.code}))}else g.highlightedCode=t.highlight(g.code,g.grammar,g.language),t.hooks.run("before-insert",g),g.element.innerHTML=g.highlightedCode,i&&i.call(a),t.hooks.run("after-highlight",g)}}},highlight:function(e,a,r){var i=t.tokenize(e,a);return n.stringify(t.util.encode(i),r)},tokenize:function(e,n){var a=t.Token,r=[e],i=n.rest;if(i){for(var l in i)n[l]=i[l];delete n.rest}e:for(var l in n)if(n.hasOwnProperty(l)&&n[l]){var s=n[l];s="Array"===t.util.type(s)?s:[s];for(var o=0;o<s.length;++o){var u=s[o],g=u.inside,c=!!u.lookbehind,f=0,h=u.alias;u=u.pattern||u;for(var p=0;p<r.length;p++){var d=r[p];if(r.length>e.length)break e;if(!(d instanceof a)){u.lastIndex=0;var m=u.exec(d);if(m){c&&(f=m[1].length);var y=m.index-1+f,m=m[0].slice(f),v=m.length,k=y+v,b=d.slice(0,y+1),w=d.slice(k+1),N=[p,1];b&&N.push(b);var O=new a(l,g?t.tokenize(m,g):m,h);N.push(O),w&&N.push(w),Array.prototype.splice.apply(r,N)}}}}}return r},hooks:{all:{},add:function(e,n){var a=t.hooks.all;a[e]=a[e]||[],a[e].push(n)},run:function(e,n){var a=t.hooks.all[e];if(a&&a.length)for(var r,i=0;r=a[i++];)r(n)}}},n=t.Token=function(e,t,n){this.type=e,this.content=t,this.alias=n};if(n.stringify=function(e,a,r){if("string"==typeof e)return e;if("Array"===t.util.type(e))return e.map(function(t){return n.stringify(t,a,e)}).join("");var i={type:e.type,content:n.stringify(e.content,a,r),tag:"span",classes:["token",e.type],attributes:{},language:a,parent:r};if("comment"==i.type&&(i.attributes.spellcheck="true"),e.alias){var l="Array"===t.util.type(e.alias)?e.alias:[e.alias];Array.prototype.push.apply(i.classes,l)}t.hooks.run("wrap",i);var s="";for(var o in i.attributes)s+=o+'="'+(i.attributes[o]||"")+'"';return"<"+i.tag+' class="'+i.classes.join(" ")+'" '+s+">"+i.content+"</"+i.tag+">"},!self.document)return self.addEventListener?(self.addEventListener("message",function(e){var n=JSON.parse(e.data),a=n.language,r=n.code;self.postMessage(JSON.stringify(t.util.encode(t.tokenize(r,t.languages[a])))),self.close()},!1),self.Prism):self.Prism;var a=document.getElementsByTagName("script");return a=a[a.length-1],a&&(t.filename=a.src,document.addEventListener&&!a.hasAttribute("data-manual")&&document.addEventListener("DOMContentLoaded",t.highlightAll)),self.Prism}();"undefined"!=typeof module&&module.exports&&(module.exports=Prism);
+</script>
 </body>
+
 </html>

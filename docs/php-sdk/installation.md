@@ -29,13 +29,13 @@ Qiniu SDK for PHP 支持以下几种安装方式。推荐的安装方式为使�
 
 如果需要更详细的关于 Composer 的使用说明，你可以访问 Composer 的官方网站[http://getcomposer.org/](http://getcomposer.org/)，或对应的中文网站 [http://www.phpcomposer.com/](http://www.phpcomposer.com/)。
 
-## 手动下载
+## 直接下载 Composer 安装包
 
-因为有些网络环境下通过 Composer 获取 Qiniu SDK 的速度较慢，开发者也可以直接下载我们准备好的符合 Composer 规范的 vendor 压缩包并在本地解压。解压后的内容和使用 Composer 方式获取到的内容完全一致，之后的使用方式也一致。
+鉴于某些原因, 国内的用户使用 Composer 下载依赖库比较慢，开发者也可以直接下载我们准备好的符合 Composer 规范的 vendor 压缩包并在本地解压。解压后的内容和使用 Composer 方式获取到的内容完全一致，之后的使用方式也一致。
 
 压缩包下载地址：[http://devtools.qiniu.io/vendor.tar.gz](http://devtools.qiniu.io/vendor.tar.gz)
 
-## 直接使用源代码包
+## 直接下载源代码包
 
 直接下载源代码压缩包并解压是另一种 SDK 的安装方法。不过因为有版本更新的维护问题，这种安装方法并不推荐，仅作为万一 Composer 安装有问题的情况下作为一种选择。
 

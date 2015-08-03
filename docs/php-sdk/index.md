@@ -1,21 +1,19 @@
 #七牛云存储PHP SDK
 
-本SDK为PHP开发者提供了操作七牛云存储服务功能的能力。
+本SDK为PHP开发者提供了操作七牛云存储服务功能的能力。PHPSDK包含了几个功能： 
 
-关于本SDK的概述。
+* 数据的上传和下载
+* 数据的管理：复制，移动，删除，获取元信息，列取文件
+* 数据的处理：图片的处理，音视频的处理，文档的处理
 
-##功能列表
+接下来逐步对各个功能给出响应的示例和演示。
 
-* 可通过[Composer](http://www.phpcomposer.com)安装，或者自行下载对应的zip包
-* 支持以表单方式和断点续传方式上传文件
-* 提供对管理内容进行改名、删除等管理操作
-* 可以设置在上传后自动执行后续的数据处理操作
 
 ## 快速上手
 
 1. **注册七牛帐号和获取密钥** 
   
-  在使用SDK之前，你必须先[注册一个七牛帐号](https://portal.qiniu.com/signup)，并[登录控制台获取一对有效的AccessKey和SecretKey](https://portal.qiniu.com/setting/key)。请详细阅读[安全建议建议](php-sdk/security.html)以进一步了解如何正确使用和管理密钥。
+  在使用SDK之前，你必须先[注册一个七牛帐号](https://portal.qiniu.com/signup)，并登录控制台获取一对有效的[AccessKey和SecretKey](https://portal.qiniu.com/setting/key)。请详细阅读[安全建议建议](php-sdk/security.html)以进一步了解如何正确使用和管理密钥。
 
 1. **环境兼容性要求** 
 
