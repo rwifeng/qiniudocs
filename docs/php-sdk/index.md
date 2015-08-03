@@ -15,7 +15,7 @@
 
 1. **注册七牛帐号和获取密钥** 
   
-  在使用SDK之前，你必须先[注册一个七牛帐号](https://portal.qiniu.com/signup)，并[登录控制台获取一对有效的AccessKey和SecretKey](https://portal.qiniu.com/setting/key)。请详细阅读[安全建议建议](security.html)以进一步了解如何正确使用和管理密钥。
+  在使用SDK之前，你必须先[注册一个七牛帐号](https://portal.qiniu.com/signup)，并[登录控制台获取一对有效的AccessKey和SecretKey](https://portal.qiniu.com/setting/key)。请详细阅读[安全建议建议](php-sdk/security.html)以进一步了解如何正确使用和管理密钥。
 
 1. **环境兼容性要求** 
 
@@ -23,11 +23,11 @@
   
 1. **安装SDK** 
  
-  使用[Composer](https://getcomposer.org)是最为推荐的安装方式。[SDK 安装指南](installation.html)中有关于安装SDK的详细说明。
+  使用[Composer](https://getcomposer.org)是最为推荐的安装方式。[SDK 安装指南](php-sdk/installation.html)中有关于安装SDK的详细说明。
 
 1. **使用SDK** 
  
-  建议阅读[快速开发指南](quick-start.html)以了解本SDK的基本使用方法，并结合相应的样例工程和[API参考手册](api)以获取所有功能的详细使用方法。
+  建议阅读[快速开发指南](php-sdk/quick-start.html)以了解本SDK的基本使用方法，并结合相应的样例工程和[API参考手册](php-sdk/api/index.html)以获取所有功能的详细使用方法。
 
 ##快速示例
 
@@ -63,6 +63,7 @@
 
 ###更多示例
 
+* 常见phpsdk示例	([源代码](https://github.com/qiniu/php-sdk/tree/master/examples))
 * 小文件上传 （[源代码](https://github.com/rwifeng/qiniudocs/tree/master/demo/simpleuploader) - [在线演示](../../demo/simpleuploader)）
 * 图片处理 （[源代码](https://github.com/rwifeng/qiniudocs/tree/master/demo/imageclipper) - [在线演示](../../demo/qimage/index.html)）
 * 一个完整的移动应用 （[源代码](https://github.com/simon-liubin/android-demo) - [移动端 Android 安装包](http://rwxf.qiniudn.com/android-demo.apk) - [管理页面](../../demo/qspace)） 
@@ -81,4 +82,4 @@
 * [博客](http://blog.qiniu.com) - 这里会持续发布市场活动和技术分享文章
 * [微信公众号]() - 及时得到七牛的所有新闻更新
 * [微博](http://weibo.com/qiniutek)
-* [常见问题FAQ]()
+* [常见问题FAQ](http://developer.qiniu.com/docs/v6/faq/faq.html)
