@@ -3,7 +3,7 @@
 class Config
 {
     const 
-        ACCESS_KEY = 'XI0n2kV1LYwzcxqSZQxJ7bpycxDIAXFGJMWUt_zG',
-        SECRET_KEY = '9WTmIAiwKQ2Nq6o93mfKd6VQqq56HjjLZonMWLJl',
+        ACCESS_KEY = 'Access_Key',
+        SECRET_KEY = 'Secret_Key',
         BUCKET_NAME = 'rwxf';
 }
