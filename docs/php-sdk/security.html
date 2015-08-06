@@ -431,9 +431,9 @@ pre[class*="language-"] {
 
 <h2 id="toc_1">上传</h2>
 
-<p>你看下我们的<a href="http://developer.qiniu.com/docs/v6/api/reference/up/">文档</a>，不管是<a href="">直接上传</a> 还是<a href="">分片上传</a>都需要一个<code>token</code>字段， 表明不是谁都可以向你的空间随便上传文件的。</p>
+<p>你看下我们的<a href="http://developer.qiniu.com/docs/v6/api/reference/up/">文档</a>，不管是<a href="http://developer.qiniu.com/docs/v6/api/overview/up/form-upload.html">直接上传</a> 还是<a href="http://developer.qiniu.com/docs/v6/api/overview/up/chunked-upload.html">分片上传</a>都需要一个<code>token</code>字段， 表明不是谁都可以向你的空间随便上传文件的。</p>
 
-<p>这个上传token是通过你的 &quot;access key&quot; 和 &quot;secret key&quot; 来生成的, 一定有效期有效的上传凭证。你可以通过这个token进行上传回调的设置， 上传后的异步转码，上传文件大小的限制， 上传文件类型的限制等等，具体可以参考<a href="">上传策略</a>。</p>
+<p>这个上传token是通过你的 &quot;access key&quot; 和 &quot;secret key&quot; 来生成的, 一定有效期有效的上传凭证。你可以通过这个token进行上传回调的设置， 上传后的异步转码，上传文件大小的限制， 上传文件类型的限制等等，具体可以参考<a href="http://developer.qiniu.com/docs/v6/api/reference/security/put-policy.html">上传策略</a>。</p>
 
 <h2 id="toc_2">下载</h2>
 
@@ -460,7 +460,7 @@ pre[class*="language-"] {
 
 <h1 id="toc_4">空间设为私有</h1>
 
-<p>你可以在我们的<a href="">管理后台</a>中的<code>空间设置</code> -&gt;<code>高级设置</code> -&gt; <code>访问控制</code> 来将空间改为私有空间。
+<p>你可以在我们的<a href="https://portal.qiniu.com/">管理后台</a>中的<code>空间设置</code> -&gt;<code>高级设置</code> -&gt; <code>访问控制</code> 来将空间改为私有空间。
 这样你就必须对公有链接签名后才能访问， 签名后外链的形式大概是：</p>
 
 <pre><code>http://&lt;domain&gt;/&lt;key&gt;?e=&lt;deadline&gt;&amp;token=&lt;downloadToken&gt;</code></pre>

@@ -6,14 +6,14 @@
 * 数据的管理：复制，移动，删除，获取元信息，列取文件
 * 数据的处理：图片的处理，音视频的处理，文档的处理
 
-接下来逐步对各个功能给出响应的示例和演示。
+接下来逐步对各个功能给出相应的示例和演示。
 
 
 ## 快速上手
 
 1. **注册七牛帐号和获取密钥** 
   
-  在使用SDK之前，你必须先[注册一个七牛帐号](https://portal.qiniu.com/signup)，并登录控制台获取一对有效的[AccessKey和SecretKey](https://portal.qiniu.com/setting/key)。请详细阅读[安全建议建议](php-sdk/security.html)以进一步了解如何正确使用和管理密钥。
+  在使用SDK之前，你必须先[注册一个七牛帐号](https://portal.qiniu.com/signup)，并登录控制台获取一对有效的[AccessKey和SecretKey](https://portal.qiniu.com/setting/key)。请详细阅读[安全建议建议](security.html)以进一步了解如何正确使用和管理密钥。
 
 1. **环境兼容性要求** 
 
@@ -21,11 +21,11 @@
   
 1. **安装SDK** 
  
-  使用[Composer](https://getcomposer.org)是最为推荐的安装方式。[SDK 安装指南](php-sdk/installation.html)中有关于安装SDK的详细说明。
+  使用[Composer](https://getcomposer.org)是最为推荐的安装方式。[SDK 安装指南](installation.html)中有关于安装SDK的详细说明。
 
 1. **使用SDK** 
  
-  建议阅读[快速开发指南](php-sdk/quick-start.html)以了解本SDK的基本使用方法，并结合相应的样例工程和[API参考手册](php-sdk/api/index.html)以获取所有功能的详细使用方法。
+  建议阅读[快速开发指南](quick-start.html)以了解本SDK的基本使用方法，并结合相应的样例工程和[API参考手册](api/index.html)以获取所有功能的详细使用方法。
 
 ##快速示例
 
@@ -78,6 +78,5 @@
 * [技术论坛](http://segmentfault.com/qiniu) - 在这里你可以和其他开发者愉快的讨论如何更好的使用七牛云服务
 * [提交工单](https://support.qiniu.com/tickets/create) - 如果你的问题不适合在论坛讨论或得不到回答，你可以提交一个工单，技术支持人员会尽快回复
 * [博客](http://blog.qiniu.com) - 这里会持续发布市场活动和技术分享文章
-* [微信公众号]() - 及时得到七牛的所有新闻更新
 * [微博](http://weibo.com/qiniutek)
 * [常见问题FAQ](http://developer.qiniu.com/docs/v6/faq/faq.html)
