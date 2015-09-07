@@ -1,8 +1,8 @@
 # 安全机制
-互联网中，安全是必须要考虑的问题。 在使用七牛的过程中安全也是一个必须要考虑的问题， 下面我们分为`上传` 和 `下载` 两个方面来说下安全方面需要注意的地方。
+互联网中，安全是必须要谨慎考虑的问题。 在使用七牛的过程中我们分为 `上传` 和 `下载` 两个方面来说下安全方面需要注意的地方。
 
 ## 上传
-你看下我们的[文档](http://developer.qiniu.com/docs/v6/api/reference/up/)，不管是[直接上传](http://developer.qiniu.com/docs/v6/api/overview/up/form-upload.html) 还是[分片上传](http://developer.qiniu.com/docs/v6/api/overview/up/chunked-upload.html)都需要一个`token`字段， 表明不是谁都可以向你的空间随便上传文件的。
+你看下我们的[文档](http://developer.qiniu.com/docs/v6/api/reference/up/)，不管是[直接上传](http://developer.qiniu.com/docs/v6/api/overview/up/form-upload.html) 还是[分片上传](http://developer.qiniu.com/docs/v6/api/overview/up/chunked-upload.html)都需要一个 `token` 字段， 表明不是谁都可以向你的空间随便上传文件的。
 
 这个上传token是通过你的 "access key" 和 "secret key" 来生成的, 一定有效期有效的上传凭证。你可以通过这个token进行上传回调的设置， 上传后的异步转码，上传文件大小的限制， 上传文件类型的限制等等，具体可以参考[上传策略](http://developer.qiniu.com/docs/v6/api/reference/security/put-policy.html)。
 
@@ -31,7 +31,7 @@ http://<domain>/<key>
 
 你可以在我们的[管理后台]()中的`空间设置` ->`基本设置` -> `设置防盗链` 来进行防盗链的设置。
 
-#空间设为私有
+### 空间设为私有
 你可以在我们的[管理后台](https://portal.qiniu.com/)中的`空间设置` ->`高级设置` -> `访问控制` 来将空间改为私有空间。
 这样你就必须对公有链接签名后才能访问， 签名后外链的形式大概是：
 
