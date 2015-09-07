@@ -14,6 +14,7 @@ $pfopOps = "avthumb/m3u8/wmImage/$wmImg";
 $policy = array(
     'persistentOps' => $pfopOps,
     'persistentNotifyUrl' => 'http://172.30.251.210:8080/cb.php',
+    'persistentPipeline' => 'abc',
 );
 
 $upToken = $auth->uploadToken($bucket, null, 3600, $policy);
